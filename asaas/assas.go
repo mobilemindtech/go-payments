@@ -1281,9 +1281,9 @@ func (this *Asaas) onValidPayment(payment *Payment) bool {
 						validator.SetError("Card", this.getMessage("Asaas.shouldNil"))
 					}
 
-					if payment.CardHolderInfo != nil {
-						validator.SetError("CardHolderInfo", this.getMessage("Asaas.shouldNil"))
-					}
+					//if payment.CardHolderInfo != nil {
+					//	validator.SetError("CardHolderInfo", this.getMessage("Asaas.shouldNil"))
+					//}
 				}
 			}
 
