@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"github.com/beego/beego/v2/core/validation"
 	"github.com/beego/i18n"
-	"github.com/mobilemindtec/go-utils/beego/validator"
+	"github.com/mobilemindtech/go-utils/beego/validator"
 	"io"
 	"net/http"
 	"strings"

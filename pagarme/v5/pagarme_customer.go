@@ -2,7 +2,7 @@ package v5
 
 import (
 	"fmt"
-	"github.com/mobilemindtec/go-utils/v2/either"
+	"github.com/mobilemindtech/go-utils/v2/either"
 )
 
 type SuccessCustomer = *Success[CustomerPtr]

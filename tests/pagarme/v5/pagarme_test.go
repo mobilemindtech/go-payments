@@ -1,9 +1,9 @@
 package v5
 
 import (
-	_ "github.com/mobilemindtec/go-payments/api"
-	pagarme "github.com/mobilemindtec/go-payments/pagarme/v5"
-	"github.com/mobilemindtec/go-payments/tests"
+	_ "github.com/mobilemindtech/go-payments/api"
+	pagarme "github.com/mobilemindtech/go-payments/pagarme/v5"
+	"github.com/mobilemindtech/go-payments/tests"
 )
 
 func fillCreditCard(creditCard *pagarme.CreditCard) *pagarme.CreditCard {

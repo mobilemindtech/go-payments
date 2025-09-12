@@ -1,14 +1,14 @@
 package v5
 
 import (
-	_ "github.com/mobilemindtec/go-payments/api"
-	pagarme "github.com/mobilemindtec/go-payments/pagarme/v5"
-	gopayments "github.com/mobilemindtec/go-payments/tests"
+	_ "github.com/mobilemindtech/go-payments/api"
+	pagarme "github.com/mobilemindtech/go-payments/pagarme/v5"
+	gopayments "github.com/mobilemindtech/go-payments/tests"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5InvoiceList
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5InvoiceList
 func TestPagarmev5InvoiceList(t *testing.T) {
 
 	Pagarme := pagarme.

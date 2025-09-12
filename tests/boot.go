@@ -11,9 +11,9 @@ import (
 	"testing"
 
 	"github.com/go-redis/redis"
-	"github.com/mobilemindtec/go-payments/api"
-	"github.com/mobilemindtec/go-payments/payzen/v4"
-	"github.com/mobilemindtec/go-utils/support"
+	"github.com/mobilemindtech/go-payments/api"
+	"github.com/mobilemindtech/go-payments/payzen/v4"
+	"github.com/mobilemindtech/go-utils/support"
 	"github.com/satori/go.uuid"
 )
 

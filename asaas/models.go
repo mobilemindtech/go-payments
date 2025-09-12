@@ -2,7 +2,7 @@ package asaas
 
 import (
 	"fmt"
-	"github.com/mobilemindtec/go-payments/api"
+	"github.com/mobilemindtech/go-payments/api"
 	"io"
 	"time"
 )
@@ -355,7 +355,7 @@ type Customer struct {
 	AddressNumber string `json:"addressNumber"`
 	Province      string `json:"province"`
 	PostalCode    string `json:"postalCode"`
-	City          int `json:"city"`
+	City          int    `json:"city"`
 	State         string `json:"state"`
 }
 
@@ -1039,7 +1039,8 @@ func (this *Response) GetPayZenSOAPStatus() api.TransactionStatus {
 	switch this.Status {
 	case api.AsaasPending:
 		return api.WaitingPayment
-	case api.AsaasReceived:return api.Captured
+	case api.AsaasReceived:
+		return api.Captured
 	case api.AsaasConfirmed:
 		return api.Captured
 	case api.AsaasOverdue:

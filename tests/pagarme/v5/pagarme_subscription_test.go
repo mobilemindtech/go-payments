@@ -1,16 +1,16 @@
 package v5
 
 import (
-	gopayments "github.com/mobilemindtec/go-payments/tests"
+	gopayments "github.com/mobilemindtech/go-payments/tests"
 	"testing"
 	"time"
 
-	_ "github.com/mobilemindtec/go-payments/api"
-	pagarme "github.com/mobilemindtec/go-payments/pagarme/v5"
+	_ "github.com/mobilemindtech/go-payments/api"
+	pagarme "github.com/mobilemindtech/go-payments/pagarme/v5"
 	"github.com/stretchr/testify/assert"
 )
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionCreateWithoutPlan
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionCreateWithoutPlan
 func TestPagarmev5SubscriptionCreateWithoutPlan(t *testing.T) {
 
 	Pagarme := pagarme.
@@ -43,7 +43,7 @@ func TestPagarmev5SubscriptionCreateWithoutPlan(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionCreateFromPlan
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionCreateFromPlan
 func TestPagarmev5SubscriptionCreateFromPlan(t *testing.T) {
 
 	PagarmeSubs := pagarme.
@@ -93,7 +93,7 @@ func TestPagarmev5SubscriptionCreateFromPlan(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionGet
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionGet
 func TestPagarmev5SubscriptionGet(t *testing.T) {
 
 	Pagarme := pagarme.
@@ -111,7 +111,7 @@ func TestPagarmev5SubscriptionGet(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionList
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionList
 func TestPagarmev5SubscriptionList(t *testing.T) {
 
 	Pagarme := pagarme.
@@ -134,7 +134,7 @@ func TestPagarmev5SubscriptionList(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionItemsList
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionItemsList
 func TestPagarmev5SubscriptionItemsList(t *testing.T) {
 
 	Pagarme := pagarme.
@@ -152,7 +152,7 @@ func TestPagarmev5SubscriptionItemsList(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionCancel
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionCancel
 func TestPagarmev5SubscriptionCancel(t *testing.T) {
 
 	Pagarme := pagarme.
@@ -166,7 +166,7 @@ func TestPagarmev5SubscriptionCancel(t *testing.T) {
 	assert.False(t, result.IsLeft())
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionEditWithCardId
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5SubscriptionEditWithCardId
 func TestPagarmev5SubscriptionEditWithCardId(t *testing.T) {
 
 	Pagarme := pagarme.

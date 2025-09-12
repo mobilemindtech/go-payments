@@ -1,15 +1,15 @@
 package v5
 
 import (
-	gopayments "github.com/mobilemindtec/go-payments/tests"
+	gopayments "github.com/mobilemindtech/go-payments/tests"
 	"testing"
 
-	_ "github.com/mobilemindtec/go-payments/api"
-	pagarme "github.com/mobilemindtec/go-payments/pagarme/v5"
+	_ "github.com/mobilemindtech/go-payments/api"
+	pagarme "github.com/mobilemindtech/go-payments/pagarme/v5"
 	"github.com/stretchr/testify/assert"
 )
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5CardCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5CardCreate
 func TestPagarmev5CardCreate(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmeCard("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -26,7 +26,7 @@ func TestPagarmev5CardCreate(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5CardList
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5CardList
 func TestPagarmev5CardList(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmeCard("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -42,7 +42,7 @@ func TestPagarmev5CardList(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5CardGet
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5CardGet
 func TestPagarmev5CardGet(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmeCard("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -56,7 +56,7 @@ func TestPagarmev5CardGet(t *testing.T) {
 	assert.Truef(t, result.Right().NonEmpty(), "empty card response")
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5CardUpdate
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5CardUpdate
 func TestPagarmev5CardUpdate(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmeCard("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -80,7 +80,7 @@ func TestPagarmev5CardUpdate(t *testing.T) {
 		})
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5CardRenew
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5CardRenew
 func TestPagarmev5CardRenew(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmeCard("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -94,7 +94,7 @@ func TestPagarmev5CardRenew(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5CardDelete
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5CardDelete
 func TestPagarmev5CardDelete(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmeCard("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))

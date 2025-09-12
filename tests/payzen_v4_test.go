@@ -3,8 +3,8 @@ package gopayments
 import (
 	_ "encoding/json"
 	"fmt"
-	"github.com/mobilemindtec/go-payments/api"
-	"github.com/mobilemindtec/go-payments/payzen/v4"
+	"github.com/mobilemindtech/go-payments/api"
+	"github.com/mobilemindtech/go-payments/payzen/v4"
 	_ "net/url"
 	_ "strings"
 	"testing"
@@ -75,7 +75,7 @@ func createPayment() *v4.Payment {
 	return payment
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPayZenV4PaymentCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPayZenV4PaymentCreate
 func TestPayZenV4PaymentCreate(t *testing.T) {
 
 	t.Errorf("Authentication = %v", Authentication)
@@ -112,7 +112,7 @@ func TestPayZenV4PaymentCreate(t *testing.T) {
 	CacheClient.Set("TransactionUuid", trans.Uuid, 0)
 }
 
-// go test -v github.com/mobilemindtec/go-payments/tests -run TestPayZenV4PaymentCancelOrRefund -v
+// go test -v github.com/mobilemindtech/go-payments/tests -run TestPayZenV4PaymentCancelOrRefund -v
 func TestPayZenV4PaymentCancelOrRefund(t *testing.T) {
 
 	payzen := v4.NewPayZen("pt-BR", ApiMode, Authentication)
@@ -137,7 +137,7 @@ func TestPayZenV4PaymentCancelOrRefund(t *testing.T) {
 	}
 }
 
-// go test -v github.com/mobilemindtec/go-payments/tests -run TestPayZenV4PaymentCapture -v
+// go test -v github.com/mobilemindtech/go-payments/tests -run TestPayZenV4PaymentCapture -v
 func TestPayZenV4PaymentCapture(t *testing.T) {
 
 	payzen := v4.NewPayZen("pt-BR", ApiMode, Authentication)
@@ -163,7 +163,7 @@ func TestPayZenV4PaymentCapture(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPayZenV4TokenCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPayZenV4TokenCreate
 func TestPayZenV4TokenCreate(t *testing.T) {
 
 	payment := createPayment()
@@ -190,7 +190,7 @@ func TestPayZenV4TokenCreate(t *testing.T) {
 	CacheClient.Set("TransactionUuid", trans.Uuid, 0)
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPayZenV4TokenUpdate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPayZenV4TokenUpdate
 func TestPayZenV4TokenUpdate(t *testing.T) {
 
 	token, _ := CacheClient.Get("Token").Result()
@@ -222,7 +222,7 @@ func TestPayZenV4TokenUpdate(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPayZenV4TokenGet
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPayZenV4TokenGet
 func TestPayZenV4TokenGet(t *testing.T) {
 
 	token, _ := CacheClient.Get("Token").Result()
@@ -249,7 +249,7 @@ func TestPayZenV4TokenGet(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPayZenV4TokenCancel
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPayZenV4TokenCancel
 func TestPayZenV4TokenCancel(t *testing.T) {
 
 	token, _ := CacheClient.Get("Token").Result()
@@ -276,7 +276,7 @@ func TestPayZenV4TokenCancel(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPayZenV4SubscriptionCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPayZenV4SubscriptionCreate
 func TestPayZenV4SubscriptionCreate(t *testing.T) {
 
 	payzen := v4.NewPayZen("pt-BR", ApiMode, Authentication)
@@ -317,7 +317,7 @@ func TestPayZenV4SubscriptionCreate(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPayZenV4SubscriptionUpdate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPayZenV4SubscriptionUpdate
 func TestPayZenV4SubscriptionUpdate(t *testing.T) {
 
 	payzen := v4.NewPayZen("pt-BR", ApiMode, Authentication)
@@ -349,7 +349,7 @@ func TestPayZenV4SubscriptionUpdate(t *testing.T) {
 
 }
 
-// go test -v github.com/mobilemindtec/go-payments/tests -run TestPayZenV4SubscriptionGet
+// go test -v github.com/mobilemindtech/go-payments/tests -run TestPayZenV4SubscriptionGet
 func TestPayZenV4SubscriptionGet(t *testing.T) {
 
 	payzen := v4.NewPayZen("pt-BR", ApiMode, Authentication)
@@ -382,7 +382,7 @@ func TestPayZenV4SubscriptionGet(t *testing.T) {
 	}
 }
 
-// go test -v github.com/mobilemindtec/go-payments/tests -run TestPayZenV4SubscriptionCancel
+// go test -v github.com/mobilemindtech/go-payments/tests -run TestPayZenV4SubscriptionCancel
 func TestPayZenV4SubscriptionCancel(t *testing.T) {
 
 	payzen := v4.NewPayZen("pt-BR", ApiMode, Authentication)
@@ -409,7 +409,7 @@ func TestPayZenV4SubscriptionCancel(t *testing.T) {
 
 }
 
-// go test -v github.com/mobilemindtec/go-payments/tests -run TestPayZenV4GetTransaction
+// go test -v github.com/mobilemindtech/go-payments/tests -run TestPayZenV4GetTransaction
 func TestPayZenV4GetTransaction(t *testing.T) {
 
 	payzen := v4.NewPayZen("pt-BR", ApiMode, Authentication)
@@ -429,7 +429,7 @@ func TestPayZenV4GetTransaction(t *testing.T) {
 	}
 }
 
-// go test -v github.com/mobilemindtec/go-payments/tests -run TestPayZenV4NotificacaoFormData
+// go test -v github.com/mobilemindtech/go-payments/tests -run TestPayZenV4NotificacaoFormData
 func TestPayZenV4NotificacaoFormData(t *testing.T) {
 	urlQuery := []byte(`kr-hash-key=password&kr-hash-algorithm=sha256_hmac&kr-answer=%7B%22shopId%22%3A%2231187067%22%2C%22orderCycle%22%3A%22CLOSED%22%2C%22orderStatus%22%3A%22PAID%22%2C%22serverDate%22%3A%222021-08-03T21%3A34%3A24%2B00%3A00%22%2C%22orderDetails%22%3A%7B%22orderTotalAmount%22%3A1500%2C%22orderEffectiveAmount%22%3A1500%2C%22orderCurrency%22%3A%22BRL%22%2C%22mode%22%3A%22TEST%22%2C%22orderId%22%3A%22a218c526-222f-4ab3-b055-248669e30b34%22%2C%22_type%22%3A%22V4%2FOrderDetails%22%7D%2C%22customer%22%3A%7B%22billingDetails%22%3A%7B%22address%22%3A%22Rua+Vit%C3%B3ria%22%2C%22category%22%3A%22PRIVATE%22%2C%22cellPhoneNumber%22%3A%2254999767081%22%2C%22city%22%3A%22Bento+Goncalves%22%2C%22country%22%3A%22BR%22%2C%22district%22%3A%22Botafogo%22%2C%22firstName%22%3A%22Ricardo%22%2C%22identityCode%22%3A%2283361855004%22%2C%22language%22%3A%22PT%22%2C%22lastName%22%3A%22Bocchi%22%2C%22phoneNumber%22%3A%225430553222%22%2C%22state%22%3A%22RS%22%2C%22streetNumber%22%3A%22255%22%2C%22title%22%3Anull%2C%22zipCode%22%3A%2295700540%22%2C%22legalName%22%3Anull%2C%22_type%22%3A%22V4%2FCustomer%2FBillingDetails%22%7D%2C%22email%22%3A%22ricardo%40mobilemind.com.br%22%2C%22reference%22%3Anull%2C%22shippingDetails%22%3A%7B%22address%22%3Anull%2C%22address2%22%3Anull%2C%22category%22%3Anull%2C%22city%22%3Anull%2C%22country%22%3Anull%2C%22deliveryCompanyName%22%3Anull%2C%22district%22%3Anull%2C%22firstName%22%3Anull%2C%22identityCode%22%3Anull%2C%22lastName%22%3Anull%2C%22legalName%22%3Anull%2C%22phoneNumber%22%3Anull%2C%22shippingMethod%22%3Anull%2C%22shippingSpeed%22%3Anull%2C%22state%22%3Anull%2C%22streetNumber%22%3Anull%2C%22zipCode%22%3Anull%2C%22_type%22%3A%22V4%2FCustomer%2FShippingDetails%22%7D%2C%22extraDetails%22%3A%7B%22browserAccept%22%3Anull%2C%22fingerPrintId%22%3Anull%2C%22ipAddress%22%3A%22138.36.81.242%22%2C%22browserUserAgent%22%3A%22Go-http-client%2F1.1%22%2C%22_type%22%3A%22V4%2FCustomer%2FExtraDetails%22%7D%2C%22shoppingCart%22%3A%7B%22insuranceAmount%22%3Anull%2C%22shippingAmount%22%3Anull%2C%22taxAmount%22%3Anull%2C%22cartItemInfo%22%3Anull%2C%22_type%22%3A%22V4%2FCustomer%2FShoppingCart%22%7D%2C%22_type%22%3A%22V4%2FCustomer%2FCustomer%22%7D%2C%22transactions%22%3A%5B%7B%22shopId%22%3A%2231187067%22%2C%22uuid%22%3A%2237fe11c80f0646b6911f72ffe16f60e2%22%2C%22amount%22%3A1500%2C%22currency%22%3A%22BRL%22%2C%22paymentMethodType%22%3A%22CARD%22%2C%22paymentMethodToken%22%3Anull%2C%22status%22%3A%22PAID%22%2C%22detailedStatus%22%3A%22AUTHORISED%22%2C%22operationType%22%3A%22DEBIT%22%2C%22effectiveStrongAuthentication%22%3A%22DISABLED%22%2C%22creationDate%22%3A%222021-08-03T18%3A25%3A56%2B00%3A00%22%2C%22errorCode%22%3Anull%2C%22errorMessage%22%3Anull%2C%22detailedErrorCode%22%3Anull%2C%22detailedErrorMessage%22%3Anull%2C%22metadata%22%3Anull%2C%22transactionDetails%22%3A%7B%22liabilityShift%22%3A%22NO%22%2C%22effectiveAmount%22%3A1500%2C%22effectiveCurrency%22%3A%22BRL%22%2C%22creationContext%22%3A%22CHARGE%22%2C%22cardDetails%22%3A%7B%22paymentSource%22%3A%22EC%22%2C%22manualValidation%22%3A%22NO%22%2C%22expectedCaptureDate%22%3A%222021-08-03T18%3A25%3A56%2B00%3A00%22%2C%22effectiveBrand%22%3A%22VISA%22%2C%22pan%22%3A%22497010XXXXXX0007%22%2C%22expiryMonth%22%3A12%2C%22expiryYear%22%3A2025%2C%22country%22%3A%22BR%22%2C%22issuerCode%22%3Anull%2C%22issuerName%22%3Anull%2C%22effectiveProductCode%22%3A%22F%22%2C%22legacyTransId%22%3A%22943225%22%2C%22legacyTransDate%22%3A%222021-08-03T18%3A25%3A56%2B00%3A00%22%2C%22paymentMethodSource%22%3A%22NEW%22%2C%22authorizationResponse%22%3A%7B%22amount%22%3A1500%2C%22currency%22%3A%22BRL%22%2C%22authorizationDate%22%3A%222021-08-03T18%3A25%3A56%2B00%3A00%22%2C%22authorizationNumber%22%3A%22009894%22%2C%22authorizationResult%22%3A%220%22%2C%22authorizationMode%22%3A%22FULL%22%2C%22_type%22%3A%22V4%2FPaymentMethod%2FDetails%2FCards%2FCardAuthorizationResponse%22%7D%2C%22captureResponse%22%3A%7B%22refundAmount%22%3Anull%2C%22refundCurrency%22%3Anull%2C%22captureDate%22%3Anull%2C%22captureFileNumber%22%3Anull%2C%22effectiveRefundAmount%22%3Anull%2C%22effectiveRefundCurrency%22%3Anull%2C%22_type%22%3A%22V4%2FPaymentMethod%2FDetails%2FCards%2FCardCaptureResponse%22%7D%2C%22threeDSResponse%22%3A%7B%22authenticationResultData%22%3A%7B%22transactionCondition%22%3Anull%2C%22enrolled%22%3Anull%2C%22status%22%3Anull%2C%22eci%22%3Anull%2C%22xid%22%3Anull%2C%22cavvAlgorithm%22%3Anull%2C%22cavv%22%3Anull%2C%22signValid%22%3Anull%2C%22brand%22%3Anull%2C%22_type%22%3A%22V4%2FPaymentMethod%2FDetails%2FCards%2FCardAuthenticationResponse%22%7D%2C%22_type%22%3A%22V4%2FPaymentMethod%2FDetails%2FCards%2FThreeDSResponse%22%7D%2C%22authenticationResponse%22%3Anull%2C%22installmentNumber%22%3A1%2C%22installmentCode%22%3A%221%22%2C%22markAuthorizationResponse%22%3A%7B%22amount%22%3Anull%2C%22currency%22%3Anull%2C%22authorizationDate%22%3Anull%2C%22authorizationNumber%22%3Anull%2C%22authorizationResult%22%3Anull%2C%22_type%22%3A%22V4%2FPaymentMethod%2FDetails%2FCards%2FMarkAuthorizationResponse%22%7D%2C%22cardHolderName%22%3Anull%2C%22identityDocumentNumber%22%3Anull%2C%22identityDocumentType%22%3Anull%2C%22_type%22%3A%22V4%2FPaymentMethod%2FDetails%2FCardDetails%22%7D%2C%22acquirerDetails%22%3Anull%2C%22fraudManagement%22%3A%7B%22riskControl%22%3A%5B%5D%2C%22riskAnalysis%22%3A%5B%5D%2C%22riskAssessments%22%3Anull%2C%22_type%22%3A%22V4%2FPaymentMethod%2FDetails%2FFraudManagement%22%7D%2C%22subscriptionDetails%22%3A%7B%22subscriptionId%22%3Anull%2C%22_type%22%3A%22V4%2FPaymentMethod%2FDetails%2FSubscriptionDetails%22%7D%2C%22parentTransactionUuid%22%3Anull%2C%22mid%22%3A%2280151051%22%2C%22sequenceNumber%22%3A1%2C%22taxAmount%22%3Anull%2C%22preTaxAmount%22%3Anull%2C%22taxRate%22%3Anull%2C%22externalTransactionId%22%3A%2201709790205590289818%22%2C%22dcc%22%3Anull%2C%22nsu%22%3A%22015736736298%22%2C%22tid%22%3Anull%2C%22acquirerNetwork%22%3A%22REDE%22%2C%22taxRefundAmount%22%3Anull%2C%22userInfo%22%3A%22API+REST%22%2C%22paymentMethodTokenPreviouslyRegistered%22%3Anull%2C%22occurrenceType%22%3A%22UNITAIRE%22%2C%22_type%22%3A%22V4%2FTransactionDetails%22%7D%2C%22_type%22%3A%22V4%2FPaymentTransaction%22%7D%5D%2C%22subMerchantDetails%22%3Anull%2C%22_type%22%3A%22V4%2FPayment%22%7D&kr-answer-type=V4%2FPayment&kr-hash=b40b62ec15baae5fa57ce914704f46c1edfa766cb1dbf0f9a5a2b766156c5c63`)
 

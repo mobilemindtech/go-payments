@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/mobilemindtec/go-payments/api"
-	"github.com/mobilemindtec/go-utils/beego/validator"
+	"github.com/mobilemindtech/go-payments/api"
+	"github.com/mobilemindtech/go-utils/beego/validator"
 )
 
 type EventType string

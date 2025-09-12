@@ -3,8 +3,8 @@ package v5
 import (
 	"fmt"
 	"github.com/beego/beego/v2/core/logs"
-	"github.com/mobilemindtec/go-payments/api"
-	"github.com/mobilemindtec/go-utils/v2/optional"
+	"github.com/mobilemindtech/go-payments/api"
+	"github.com/mobilemindtech/go-utils/v2/optional"
 	"log"
 	"strings"
 	"time"
@@ -123,8 +123,8 @@ const (
 	Expired  Status = "expired"
 	Inactive Status = "inactive"
 	Canceled Status = "canceled"
-	Failed Status = "failed" // pagarme
-	Future Status = "future" // pagarme
+	Failed   Status = "failed" // pagarme
+	Future   Status = "future" // pagarme
 )
 
 const (
@@ -260,12 +260,12 @@ type Order struct {
 	Id     string `json:"id,omitempty"`
 	Amount int64  `json:"amount,omitempty"`
 
-	Status    string      `json:"status,omitempty"`
-	CreatedAt string      `json:"created_at,omitempty"`
-	UpdatedAt string      `json:"updated_at,omitempty"`
-	Charges   []*Charge   `json:"charges,omitempty"`
-	Checkouts []*Checkout `json:"checkouts,omitempty"`
-	Metadata map[string]string `json:"metadata,omitempty"`
+	Status    string            `json:"status,omitempty"`
+	CreatedAt string            `json:"created_at,omitempty"`
+	UpdatedAt string            `json:"updated_at,omitempty"`
+	Charges   []*Charge         `json:"charges,omitempty"`
+	Checkouts []*Checkout       `json:"checkouts,omitempty"`
+	Metadata  map[string]string `json:"metadata,omitempty"`
 }
 
 func (this *Order) IsCreditCard() bool {
@@ -344,8 +344,6 @@ func (this *Order) GetTranscationId() string {
 }
 
 func (this *Order) GetChargeId() string {
-
-
 
 	return optional.FlatMap[ChargePtr, string](
 		this.GetLastCharge(),
@@ -426,21 +424,21 @@ type OrderItem struct {
 }
 
 type Customer struct {
-	Id         string            `json:"id,omitempty"`
-	Name       string            `json:"name" valid:"Required;MaxSize(64)"`
-	Type       CustomerType      `json:"type" valid:"Required"`
-	Email      string            `json:"email" valid:"Required;Email"`
-	Code       string            `json:"code" valid:"MaxSize(52)"` // código na plataforma
-	Document   string            `json:"document" valid:"MaxSize(50)"`
-	DocumentType DocumentType `json:"document_type"`
-	Gender     Gender            `json:"gender"`
-	Delinquent bool              `json:"delinquent"`
-	Address    *Address          `json:"address"`
-	Phones     *Phones           `json:"phones"`
-	Birthdate  string            `json:"birthdate"`
-	Metadata   map[string]string `json:"metadata"`
-	CreatedAt  string            `json:"created_at,omitempty"`
-	UpdatedAt  string            `json:"updated_at,omitempty"`
+	Id           string            `json:"id,omitempty"`
+	Name         string            `json:"name" valid:"Required;MaxSize(64)"`
+	Type         CustomerType      `json:"type" valid:"Required"`
+	Email        string            `json:"email" valid:"Required;Email"`
+	Code         string            `json:"code" valid:"MaxSize(52)"` // código na plataforma
+	Document     string            `json:"document" valid:"MaxSize(50)"`
+	DocumentType DocumentType      `json:"document_type"`
+	Gender       Gender            `json:"gender"`
+	Delinquent   bool              `json:"delinquent"`
+	Address      *Address          `json:"address"`
+	Phones       *Phones           `json:"phones"`
+	Birthdate    string            `json:"birthdate"`
+	Metadata     map[string]string `json:"metadata"`
+	CreatedAt    string            `json:"created_at,omitempty"`
+	UpdatedAt    string            `json:"updated_at,omitempty"`
 }
 
 func NewCustomer() *Customer {
@@ -482,7 +480,7 @@ func NewPhone(countryCode string, areaCode string, number string) *Phone {
 }
 
 func (this *Phone) ToString() string {
-	return fmt.Sprintf("%v%v",this.AreaCode, this.Number)
+	return fmt.Sprintf("%v%v", this.AreaCode, this.Number)
 }
 
 type Payment struct {
@@ -510,8 +508,6 @@ func (this *Payment) HasCardToken() bool {
 	return this.IsCreditCard() && len(this.CreditCard.CardToken) > 0
 }
 
-
-
 func NewPayment(amount int64, method PaymentMethod) *Payment {
 
 	switch method {
@@ -534,25 +530,24 @@ type CreditCard struct {
 	Installments        int64         `json:"installments"`
 	StatementDescriptor string        `json:"statement_descriptor" valid:"Required;MaxSize(13)"`
 	Card                *Card         `json:"card,omitempty"`
-	CardId string `json:"card_id,omitempty"`
-	CardToken string `json:"card_token,omitempty"`
+	CardId              string        `json:"card_id,omitempty"`
+	CardToken           string        `json:"card_token,omitempty"`
 }
 
 func NewCreditCard() *CreditCard {
 	return &CreditCard{OperationType: AuthAndCapture, Installments: 1, Card: NewCard()}
 }
 
-
 type Card struct {
-	Number           string          `json:"number,omitempty" valid:""`
-	HolderName       string          `json:"holder_name,omitempty" valid:""`
-	HolderDocument   string          `json:"holder_document,omitempty" valid:""`
-	ExpMonth         int64           `json:"exp_month,omitempty" valid:""` // Value between 1 and 12 (included)
-	ExpYear          int64           `json:"exp_year,omitempty" valid:""`  // Formatos yy ou yyyy. Ex: 23 ou 2023
-	Cvv              string          `json:"cvv,omitempty" valid:""`
-	Brand            string          `json:"brand,omitempty" valid:""`
-	Label            string          `json:"label,omitempty" valid:""`
-	CardId           string          `json:"card_id,omitempty"`
+	Number         string `json:"number,omitempty" valid:""`
+	HolderName     string `json:"holder_name,omitempty" valid:""`
+	HolderDocument string `json:"holder_document,omitempty" valid:""`
+	ExpMonth       int64  `json:"exp_month,omitempty" valid:""` // Value between 1 and 12 (included)
+	ExpYear        int64  `json:"exp_year,omitempty" valid:""`  // Formatos yy ou yyyy. Ex: 23 ou 2023
+	Cvv            string `json:"cvv,omitempty" valid:""`
+	Brand          string `json:"brand,omitempty" valid:""`
+	Label          string `json:"label,omitempty" valid:""`
+	CardId         string `json:"card_id,omitempty"`
 	//CardToken        string          `json:"card_token,omitempty"`
 	BillingAddressId string          `json:"billing_address_id,omitempty"`
 	BillingAddress   *BillingAddress `json:"billing_address,omitempty"`
@@ -579,18 +574,18 @@ func NewCard() *Card {
 
 func (this *Card) Copy() *Card {
 	return &Card{
-		Number: this.Number,
-		HolderName: this.HolderName,
+		Number:         this.Number,
+		HolderName:     this.HolderName,
 		HolderDocument: this.HolderDocument,
-		ExpMonth: this.ExpMonth,
-		ExpYear: this.ExpYear,
-		Cvv: this.Cvv,
-		Brand: this.Brand,
+		ExpMonth:       this.ExpMonth,
+		ExpYear:        this.ExpYear,
+		Cvv:            this.Cvv,
+		Brand:          this.Brand,
 	}
 }
 
 // Clean clean card sensitive information
-func (this *Card) Clean(){
+func (this *Card) Clean() {
 	this.Number = ""
 	this.HolderName = ""
 	this.HolderDocument = ""
@@ -828,7 +823,7 @@ func NewSubscription() *Subscription {
 		Currency:      BRL,
 		Installments:  1,
 		BillingType:   PrePaid,
-		Metadata: make(map[string]string),
+		Metadata:      make(map[string]string),
 	}
 }
 
@@ -837,7 +832,6 @@ func (this *Subscription) SetCardToken(token string) {
 	this.Card.Clean()
 	this.CardToken = token
 }
-
 
 func (this *Subscription) WithCustomer(customer CustomerPtr) *Subscription {
 	this.Customer = customer
@@ -881,7 +875,6 @@ func (this *Subscription) HasCardIdOrToken() bool {
 	return this.PaymentMethod == MethodCreditCard &&
 		(len(this.CardId) > 0 || len(this.CardToken) > 0)
 }
-
 
 type SubscriptionPtr = *Subscription
 type Subscriptions = []SubscriptionPtr
@@ -1005,14 +998,14 @@ type InvoicePtr = *Invoice
 type Invoices = []InvoicePtr
 
 type CardTokenResponse struct {
-	Id string `json:"id"`
-	Type string `json:"type"`
+	Id        string `json:"id"`
+	Type      string `json:"type"`
 	CreatedAt string `json:"created_at"`
 	ExpiresAt string `json:"expires_at"`
-	Card *Card `json:"card"`
+	Card      *Card  `json:"card"`
 }
 
-type  CardTokenResponsePtr = *CardTokenResponse
+type CardTokenResponsePtr = *CardTokenResponse
 
 type ErrorResponse struct {
 	Message    string              `json:"message"`
@@ -1187,7 +1180,7 @@ type LastTransaction struct {
 	TransactionType     string              `json:"transaction_type"`
 	GatewayId           string              `json:"gateway_id"`
 	Amount              int64               `json:"amount"`
-	PaidAmount              int64               `json:"paid_amount"`
+	PaidAmount          int64               `json:"paid_amount"`
 	Status              api.PagarmeV5Status `json:"status"`
 	Success             bool                `json:"success"`
 	Installments        int64               `json:"installments"`
@@ -1203,7 +1196,7 @@ type LastTransaction struct {
 	FundingSource       string              `json:"funding_source"`
 	CreatedAt           string              `json:"created_at"`
 	UpdatedAt           string              `json:"updated_at"`
-	DueAt           string              `json:"due_at"`
+	DueAt               string              `json:"due_at"`
 	GatewayResponse     *GatewayResponse    `json:"gateway_response"`
 	AntifraudResponse   *AntifraudResponse  `json:"antifraud_response"`
 	Metadata            map[string]string   `json:"metadata"`

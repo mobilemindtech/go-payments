@@ -1,4 +1,4 @@
-module github.com/mobilemindtec/go-payments
+module github.com/mobilemindtech/go-payments
 
 go 1.24.0
 
@@ -7,7 +7,7 @@ require (
 	github.com/beego/i18n v0.0.0-20161101132742-e9308947f407
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/leekchan/accounting v1.0.0
-	github.com/mobilemindtec/go-utils v0.0.0-20250220195511-97d41470f967
+	github.com/mobilemindtech/go-utils v0.0.0-20250220195511-97d41470f967
 	github.com/satori/go.uuid v1.2.0
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/net v0.35.0
@@ -25,7 +25,7 @@ require (
 	github.com/jtolds/gls v4.20.0+incompatible // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
-	github.com/mobilemindtec/go-io v0.0.0-20241018190539-11fe1345c51e // indirect
+	github.com/mobilemindtech/go-io v0.0.0-20241018190539-11fe1345c51e // indirect
 	github.com/onsi/ginkgo v1.16.5 // indirect
 	github.com/onsi/gomega v1.36.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect

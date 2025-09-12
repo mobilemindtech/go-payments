@@ -1,13 +1,13 @@
 package v5
 
 import (
-	pagarme "github.com/mobilemindtec/go-payments/pagarme/v5"
-	gopayments "github.com/mobilemindtec/go-payments/tests"
+	pagarme "github.com/mobilemindtech/go-payments/pagarme/v5"
+	gopayments "github.com/mobilemindtech/go-payments/tests"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPagarmev5OrderCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPagarmev5OrderCreate
 func TestPagarmev5OrderCreate(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmeOrder("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -23,7 +23,7 @@ func TestPagarmev5OrderCreate(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPagarmev5OrderList
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPagarmev5OrderList
 func TestPagarmev5OrderList(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmeOrder("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -48,7 +48,7 @@ func TestPagarmev5OrderList(t *testing.T) {
 		})
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPagarmev5OrderGet
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPagarmev5OrderGet
 func TestPagarmev5OrderGet(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmeOrder("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))

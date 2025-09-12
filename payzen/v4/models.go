@@ -3,7 +3,7 @@ package v4
 import (
 	"fmt"
 	"github.com/leekchan/accounting"
-	"github.com/mobilemindtec/go-payments/api"
+	"github.com/mobilemindtech/go-payments/api"
 	"strconv"
 	"strings"
 	"time"
@@ -387,9 +387,9 @@ type SubscriptionDetails struct {
 
 type RiskAnalysi struct {
 	ResultCode string `json:"resultCode"`
-	Status string `json:"status"`
-	RequestId string `json:"requestId"`
-	Score string `json:"score"`
+	Status     string `json:"status"`
+	RequestId  string `json:"requestId"`
+	Score      string `json:"score"`
 }
 
 type FraudManagement struct {
@@ -400,7 +400,7 @@ type TransactionDetails struct {
 	ExternalTransactionId string               `json:"externalTransactionId"` // nsu
 	Nsu                   string               `json:"nsu"`                   // nsu
 	SubscriptionDetails   *SubscriptionDetails `json:"subscriptionDetails"`
-	FraudManagement *FraudManagement `json:"fraudManagement"`
+	FraudManagement       *FraudManagement     `json:"fraudManagement"`
 }
 
 type Transaction struct {
@@ -421,8 +421,8 @@ type Transaction struct {
 	TransactionDetails   *TransactionDetails `json:"transactionDetails"`
 	TransactionStatus    TransactionStatus
 	PaymentStatus        PaymentStatus
-	CreationDate string `json:"creationDate"`
-	ResponseCode         int64 `json:"responseCode,omitempty"`
+	CreationDate         string `json:"creationDate"`
+	ResponseCode         int64  `json:"responseCode,omitempty"`
 }
 
 func (this *Transaction) HasError() bool {

@@ -2,9 +2,9 @@ package v5
 
 import (
 	"fmt"
-	"github.com/mobilemindtec/go-utils/beego/validator"
-	"github.com/mobilemindtec/go-utils/v2/either"
-	"github.com/mobilemindtec/go-utils/v2/maps"
+	"github.com/mobilemindtech/go-utils/beego/validator"
+	"github.com/mobilemindtech/go-utils/v2/either"
+	"github.com/mobilemindtech/go-utils/v2/maps"
 	"reflect"
 )
 
@@ -197,7 +197,6 @@ func (this *PagarmeSubscription) validate(subscription *Subscription) bool {
 	return this.processValidator()
 }
 
-
 func (this *PagarmeSubscription) subscriptionValidator(entity interface{}, validator *validator.Validation) {
 
 	s := entity.(*Subscription)
@@ -233,13 +232,12 @@ func (this *PagarmeSubscription) subscriptionValidator(entity interface{}, valid
 			this.EntityValidator.AddValidationForType(
 				reflect.TypeOf(s.Card),
 				cardValidator(ValidateCardCreate))
-			
+
 		}
-		
-		
+
 	}
-	
+
 	if s.Card != nil {
-		
+
 	}
 }

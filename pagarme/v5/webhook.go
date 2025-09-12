@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/mobilemindtec/go-utils/beego/validator"
-	"github.com/mobilemindtec/go-utils/support"
+	"github.com/mobilemindtech/go-utils/beego/validator"
+	"github.com/mobilemindtech/go-utils/support"
 	"strings"
 )
 

@@ -1,15 +1,15 @@
 package v5
 
 import (
-	gopayments "github.com/mobilemindtec/go-payments/tests"
+	gopayments "github.com/mobilemindtech/go-payments/tests"
 	"testing"
 
-	_ "github.com/mobilemindtec/go-payments/api"
-	pagarme "github.com/mobilemindtec/go-payments/pagarme/v5"
+	_ "github.com/mobilemindtech/go-payments/api"
+	pagarme "github.com/mobilemindtech/go-payments/pagarme/v5"
 	"github.com/stretchr/testify/assert"
 )
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5PlanCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5PlanCreate
 func TestPagarmev5PlanCreate(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmePlan("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -32,7 +32,7 @@ func TestPagarmev5PlanCreate(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5PlanEdit
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5PlanEdit
 func TestPagarmev5PlanEdit(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmePlan("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -49,7 +49,7 @@ func TestPagarmev5PlanEdit(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5PlanList
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5PlanList
 func TestPagarmev5PlanList(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmePlan("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -74,7 +74,7 @@ func TestPagarmev5PlanList(t *testing.T) {
 		})
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5PlanUpdate
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5PlanUpdate
 func TestPagarmev5PlanUpdate(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmePlan("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))
@@ -99,7 +99,7 @@ func TestPagarmev5PlanUpdate(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests/pagarme/v5 -run TestPagarmev5PlanDelete
+// go test -v  github.com/mobilemindtech/go-payments/tests/pagarme/v5 -run TestPagarmev5PlanDelete
 func TestPagarmev5PlanDelete(t *testing.T) {
 
 	Pagarme := pagarme.NewPagarmePlan("pt-BR", pagarme.NewAuthentication(gopayments.SecretKey, gopayments.PublicKey))

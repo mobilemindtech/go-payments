@@ -1,8 +1,8 @@
 package v5
 
 import (
-	"github.com/mobilemindtec/go-utils/json"
-	"github.com/mobilemindtec/go-utils/v2/maps"
+	"github.com/mobilemindtech/go-utils/json"
+	"github.com/mobilemindtech/go-utils/v2/maps"
 	"time"
 )
 

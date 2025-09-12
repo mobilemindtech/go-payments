@@ -8,8 +8,8 @@ import (
 	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/core/validation"
 	"github.com/beego/i18n"
-	"github.com/mobilemindtec/go-payments/api"
-	"github.com/mobilemindtec/go-utils/beego/validator"
+	"github.com/mobilemindtech/go-payments/api"
+	"github.com/mobilemindtech/go-utils/beego/validator"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -414,7 +414,7 @@ func (this *Asaas) SubscriptionUpdateCardToken(payment *Payment) (*Response, err
 
 	data["creditCardHolderInfo"] = payment.CardHolderInfo
 	data["remoteIp"] = payment.RemoteIp
-	
+
 	return this.put(data, fmt.Sprintf("subscriptions/%v/creditCard", payment.Id), nil)
 }
 
@@ -1342,7 +1342,6 @@ func (this *Asaas) urlQuery(filter map[string]string) string {
 
 		url = url[0 : len(url)-1]
 	}
-	
+
 	return url
 }
-

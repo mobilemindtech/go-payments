@@ -2,9 +2,9 @@
 export GOPATH=`pwd`
 export GOROOT=/usr/local/opt/go/libexec
 
-go test  github.com/mobilemindtec/go-payments/tests -v
+go test  github.com/mobilemindtech/go-payments/tests -v
 
-go test  github.com/mobilemindtec/go-payments/tests -run TestPagarmeCreateCard
+go test  github.com/mobilemindtech/go-payments/tests -run TestPagarmeCreateCard
 
 
 

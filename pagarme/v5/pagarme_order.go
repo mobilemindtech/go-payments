@@ -2,8 +2,8 @@ package v5
 
 import (
 	"fmt"
-	"github.com/mobilemindtec/go-utils/beego/validator"
-	"github.com/mobilemindtec/go-utils/v2/either"
+	"github.com/mobilemindtech/go-utils/beego/validator"
+	"github.com/mobilemindtech/go-utils/v2/either"
 	"reflect"
 )
 
@@ -82,7 +82,6 @@ func (this *Pagarme) onValidOrder(order *Order) bool {
 				validator.SetError("Payments", "Payments array is required")
 			}
 
-
 			if len(p.Items) == 0 {
 				validator.SetError("Items", "Items is required")
 			}
@@ -95,7 +94,6 @@ func (this *Pagarme) onValidOrder(order *Order) bool {
 
 		})
 
-	
 	this.EntityValidator.AddEntity(order)
 
 	if order.Payments != nil {
@@ -138,7 +136,6 @@ func (this *Pagarme) onValidOrder(order *Order) bool {
 
 					if len(it.CreditCard.CardId) == 0 && len(it.CreditCard.CardToken) == 0 {
 
-
 						if it.CreditCard.Card != nil {
 
 							this.EntityValidator.AddEntity(it.CreditCard.Card)
@@ -148,7 +145,6 @@ func (this *Pagarme) onValidOrder(order *Order) bool {
 								cardValidator(ValidateCardCreate))
 						}
 
-
 						this.EntityValidator.AddValidationForType(
 							reflect.TypeOf(it.CreditCard), func(entity interface{}, validator *validator.Validation) {
 
@@ -157,8 +153,6 @@ func (this *Pagarme) onValidOrder(order *Order) bool {
 								}
 							})
 					}
-
-
 
 				}
 			case MethodBoleto:

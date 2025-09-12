@@ -2,21 +2,21 @@ package v5
 
 import (
 	"fmt"
-	"github.com/mobilemindtec/go-utils/beego/validator"
-	"github.com/mobilemindtec/go-utils/v2/either"
-	"github.com/mobilemindtec/go-utils/v2/maps"
-	"github.com/mobilemindtec/go-utils/validator/cnpj"
-	"github.com/mobilemindtec/go-utils/validator/cpf"
+	"github.com/mobilemindtech/go-utils/beego/validator"
+	"github.com/mobilemindtech/go-utils/v2/either"
+	"github.com/mobilemindtech/go-utils/v2/maps"
+	"github.com/mobilemindtech/go-utils/validator/cnpj"
+	"github.com/mobilemindtech/go-utils/validator/cpf"
 	"reflect"
 )
+
 type CardValidationType int
+
 const (
 	ValidateCardCreate CardValidationType = iota + 1
 	ValidateCardUpdate
 	ValidateCardTokenize
 )
-
-
 
 type SuccessCardToken = *Success[CardTokenResponsePtr]
 type SuccessCard = *Success[CardPtr]
@@ -187,7 +187,6 @@ func (this *PagarmeCard) validateForTokenize(card *Card) bool {
 	return this.processValidator()
 }
 
-
 func (this *PagarmeCard) validateForCreate(card *Card) bool {
 	this.EntityValidator.AddEntity(card)
 	this.EntityValidator.AddValidationForType(reflect.TypeOf(card), cardValidator(ValidateCardCreate))
@@ -204,7 +203,7 @@ func cardValidator(validationType CardValidationType) func(interface{}, *validat
 	return func(entity interface{}, validator *validator.Validation) {
 		c := entity.(*Card)
 
-		switch validationType  {
+		switch validationType {
 		case ValidateCardCreate, ValidateCardTokenize:
 			if len(c.Number) < 13 || len(c.Number) > 19 {
 				validator.SetError("Number", "Number is required size between 13 and 19")
@@ -237,6 +236,5 @@ func cardValidator(validationType CardValidationType) func(interface{}, *validat
 			}
 		}
 	}
-
 
 }

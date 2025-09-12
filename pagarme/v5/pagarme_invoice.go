@@ -2,7 +2,7 @@ package v5
 
 import (
 	"fmt"
-	"github.com/mobilemindtec/go-utils/v2/either"
+	"github.com/mobilemindtech/go-utils/v2/either"
 )
 
 type SuccessInvoice = *Success[InvoicePtr]
@@ -52,7 +52,7 @@ func (this *PagarmeInvoice) List(query *InvoiceQuery) *either.Either[*ErrorRespo
 }
 
 func (this *PagarmeInvoice) Cancel(id string) *either.Either[*ErrorResponse, SuccessBool] {
-	
+
 	if len(id) == 0 {
 		return either.Left[*ErrorResponse, SuccessBool](
 			NewErrorResponse("invoice id is required"))
@@ -62,7 +62,7 @@ func (this *PagarmeInvoice) Cancel(id string) *either.Either[*ErrorResponse, Suc
 
 	return either.
 		MapIf(
-			this.delete(uri,nil),
+			this.delete(uri, nil),
 			func(e *either.Either[error, *Response]) *ErrorResponse {
 				return unwrapError(e.UnwrapLeft())
 			},

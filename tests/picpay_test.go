@@ -2,13 +2,13 @@ package gopayments
 
 import (
 	"fmt"
-	"github.com/mobilemindtec/go-payments/api"
-	"github.com/mobilemindtec/go-payments/picpay"
+	"github.com/mobilemindtech/go-payments/api"
+	"github.com/mobilemindtech/go-payments/picpay"
 	"testing"
 	"time"
 )
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPicPayCreateTransaction
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPicPayCreateTransaction
 func TestPicPayCreateTransaction(t *testing.T) {
 
 	Picpay := picpay.NewPicPay("pt-BR", Token, SallerToken)
@@ -42,7 +42,7 @@ func TestPicPayCreateTransaction(t *testing.T) {
 	CacheClient.Set("ReferenceId", request.ReferenceId, 0)
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPicPayCheckStatus
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPicPayCheckStatus
 func TestPicPayCheckStatus(t *testing.T) {
 
 	Picpay := picpay.NewPicPay("pt-BR", Token, SallerToken)
@@ -69,7 +69,7 @@ func TestPicPayCheckStatus(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestPicPayCheckCancel
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPicPayCheckCancel
 func TestPicPayCheckCancel(t *testing.T) {
 
 	Picpay := picpay.NewPicPay("pt-BR", Token, SallerToken)

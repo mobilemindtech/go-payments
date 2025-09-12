@@ -2,8 +2,8 @@ package gopayments
 
 import (
 	"fmt"
-	"github.com/mobilemindtec/go-payments/api"
-	"github.com/mobilemindtec/go-payments/asaas"
+	"github.com/mobilemindtech/go-payments/api"
+	"github.com/mobilemindtech/go-payments/asaas"
 	"testing"
 	"time"
 )
@@ -25,7 +25,7 @@ func fillAsaasCard(payment *asaas.Payment) {
 	payment.RemoteIp = GetHostIp()
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCustomerCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCustomerCreate
 func TestAsaasCustomerCreate(t *testing.T) {
 
 	customer := new(asaas.Customer)
@@ -60,7 +60,7 @@ func TestAsaasCustomerCreate(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCustomerFind
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCustomerFind
 func TestAsaasCustomerFind(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -98,7 +98,7 @@ func TestAsaasCustomerFind(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCustomerGet
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCustomerGet
 func TestAsaasCustomerGet(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -137,7 +137,7 @@ func TestAsaasCustomerGet(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCustomerUpdate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCustomerUpdate
 func TestAsaasCustomerUpdate(t *testing.T) {
 
 	id, _ := CacheClient.Get("ClientId").Result()
@@ -174,7 +174,7 @@ func TestAsaasCustomerUpdate(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCreatePaymentBoleto
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCreatePaymentBoleto
 func TestAsaasCreatePaymentBoleto(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -207,7 +207,7 @@ func TestAsaasCreatePaymentBoleto(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCreatePaymentPix
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCreatePaymentPix
 func TestAsaasCreatePaymentPix(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -240,7 +240,7 @@ func TestAsaasCreatePaymentPix(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCreatePaymentCreditCard
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCreatePaymentCreditCard
 func TestAsaasCreatePaymentCreditCard(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -275,7 +275,7 @@ func TestAsaasCreatePaymentCreditCard(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCreatePaymentCreditCardParcelado
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCreatePaymentCreditCardParcelado
 func TestAsaasCreatePaymentCreditCardParcelado(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -311,7 +311,7 @@ func TestAsaasCreatePaymentCreditCardParcelado(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCreatePaymentBoletoParcelado
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCreatePaymentBoletoParcelado
 func TestAsaasCreatePaymentBoletoParcelado(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -344,7 +344,7 @@ func TestAsaasCreatePaymentBoletoParcelado(t *testing.T) {
 	CacheClient.Set("InstallmentId", result.Installment, 0)
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasPaymentCancel
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasPaymentCancel
 func TestAsaasPaymentCancel(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -370,7 +370,7 @@ func TestAsaasPaymentCancel(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasPaymentRefund
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasPaymentRefund
 func TestAsaasPaymentRefund(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -396,7 +396,7 @@ func TestAsaasPaymentRefund(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasPaymentGet
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasPaymentGet
 func TestAsaasPaymentGet(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -422,7 +422,7 @@ func TestAsaasPaymentGet(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasPaymentGetPixQrCode
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasPaymentGetPixQrCode
 func TestAsaasPaymentGetPixQrCode(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -454,7 +454,7 @@ func TestAsaasPaymentGetPixQrCode(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasPaymentReceiveInCash
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasPaymentReceiveInCash
 func TestAsaasPaymentReceiveInCash(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -478,7 +478,7 @@ func TestAsaasPaymentReceiveInCash(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasPaymentFind
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasPaymentFind
 func TestAsaasPaymentFind(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -511,7 +511,7 @@ func TestAsaasPaymentFind(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasPaymentGetInstalments
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasPaymentGetInstalments
 func TestAsaasPaymentGetInstalments(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -553,7 +553,7 @@ func TestAsaasPaymentGetInstalments(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasInstallmentCancel
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasInstallmentCancel
 func TestAsaasInstallmentCancel(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -579,7 +579,7 @@ func TestAsaasInstallmentCancel(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasInstallmentRefund
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasInstallmentRefund
 func TestAsaasInstallmentRefund(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -605,7 +605,7 @@ func TestAsaasInstallmentRefund(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaaTokenCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaaTokenCreate
 func TestAsaaTokenCreate(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -646,7 +646,7 @@ func TestAsaaTokenCreate(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCreateSubscriptionBoleto
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCreateSubscriptionBoleto
 func TestAsaasCreateSubscriptionBoleto(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -684,7 +684,7 @@ func TestAsaasCreateSubscriptionBoleto(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCreateSubscriptionCard
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCreateSubscriptionCard
 func TestAsaasCreateSubscriptionCard(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -723,7 +723,7 @@ func TestAsaasCreateSubscriptionCard(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaaSubscriptionUpdate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaaSubscriptionUpdate
 func TestAsaaSubscriptionUpdate(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -760,7 +760,7 @@ func TestAsaaSubscriptionUpdate(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaaSubscriptionUpdateCardToken
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaaSubscriptionUpdateCardToken
 func TestAsaaSubscriptionUpdateCardToken(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -789,7 +789,7 @@ func TestAsaaSubscriptionUpdateCardToken(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasSubscriptionGet
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasSubscriptionGet
 func TestAsaasSubscriptionGet(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -815,7 +815,7 @@ func TestAsaasSubscriptionGet(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasSubscriptionPaymentsGet
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasSubscriptionPaymentsGet
 func TestAsaasSubscriptionPaymentsGet(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -848,7 +848,7 @@ func TestAsaasSubscriptionPaymentsGet(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasSubscriptionCancel
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasSubscriptionCancel
 func TestAsaasSubscriptionCancel(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -874,7 +874,7 @@ func TestAsaasSubscriptionCancel(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasPaymentLinkCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasPaymentLinkCreate
 func TestAsaasPaymentLinkCreate(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -906,7 +906,7 @@ func TestAsaasPaymentLinkCreate(t *testing.T) {
 	CacheClient.Set("PaymentLinkId", result.Id, 0)
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasPaymentLinkCancel
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasPaymentLinkCancel
 func TestAsaasPaymentLinkCancel(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -932,7 +932,7 @@ func TestAsaasPaymentLinkCancel(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasPaymentLinkGet
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasPaymentLinkGet
 func TestAsaasPaymentLinkGet(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -958,7 +958,7 @@ func TestAsaasPaymentLinkGet(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasFinancialTransactionsList
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasFinancialTransactionsList
 func TestAsaasFinancialTransactionsList(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -987,7 +987,7 @@ func TestAsaasFinancialTransactionsList(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCurrentBalance
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCurrentBalance
 func TestAsaasCurrentBalance(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -1011,7 +1011,7 @@ func TestAsaasCurrentBalance(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasTransferCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasTransferCreate
 func TestAsaasTransferCreate(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -1043,7 +1043,7 @@ func TestAsaasTransferCreate(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasTransferList
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasTransferList
 func TestAsaasTransferList(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -1081,7 +1081,7 @@ func TestAsaasTransferList(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasWebhook
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasWebhook
 func TestAsaasWebhook(t *testing.T) {
 	jsonData := []byte(`
     {
@@ -1136,7 +1136,7 @@ func TestAsaasWebhook(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasAccountStatus
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasAccountStatus
 func TestAsaasAccountStatus(t *testing.T) {
 
 	token := "$aact_YTU5YTE0M2M2N2I4MTliNzk0YTI5N2U5MzdjNWZmNDQ6OjAwMDAwMDAwMDAwMDAwNzQwNTc6OiRhYWNoXzk2NGM0YWZlLWIxZGUtNDIyOC1iY2EyLTg0OWZjZjYyZWFmOA=="
@@ -1146,7 +1146,7 @@ func TestAsaasAccountStatus(t *testing.T) {
 	Asaas.AccountStatus()
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasAccountInfo
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasAccountInfo
 func TestAsaasAccountInfo(t *testing.T) {
 
 	token := "$aact_YTU5YTE0M2M2N2I4MTliNzk0YTI5N2U5MzdjNWZmNDQ6OjAwMDAwMDAwMDAwMDAwNzQwNTc6OiRhYWNoXzk2NGM0YWZlLWIxZGUtNDIyOC1iY2EyLTg0OWZjZjYyZWFmOA=="
@@ -1156,7 +1156,7 @@ func TestAsaasAccountInfo(t *testing.T) {
 	Asaas.AccountGet()
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasAccountDocuments
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasAccountDocuments
 func TestAsaasAccountDocuments(t *testing.T) {
 
 	token := "$aact_YTU5YTE0M2M2N2I4MTliNzk0YTI5N2U5MzdjNWZmNDQ6OjAwMDAwMDAwMDAwMDAwNzQwNTc6OiRhYWNoXzk2NGM0YWZlLWIxZGUtNDIyOC1iY2EyLTg0OWZjZjYyZWFmOA=="
@@ -1166,7 +1166,7 @@ func TestAsaasAccountDocuments(t *testing.T) {
 	Asaas.AccountDocuments()
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasAccountCreate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasAccountCreate
 func TestAsaasAccountCreate(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -1235,7 +1235,7 @@ func TestAsaasAccountCreate(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasBankAccountCreateOrUpdate
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasBankAccountCreateOrUpdate
 func TestAsaasBankAccountCreateOrUpdate(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -1264,7 +1264,7 @@ func TestAsaasBankAccountCreateOrUpdate(t *testing.T) {
 	}
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasAccountList
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasAccountList
 func TestAsaasAccountList(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -1294,7 +1294,7 @@ func TestAsaasAccountList(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasCreateOrChangeWebhook
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasCreateOrChangeWebhook
 func TestAsaasCreateOrChangeWebhook(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -1324,7 +1324,7 @@ func TestAsaasCreateOrChangeWebhook(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasWebhookStatus
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasWebhookStatus
 func TestAsaasWebhookStatus(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)
@@ -1349,7 +1349,7 @@ func TestAsaasWebhookStatus(t *testing.T) {
 
 }
 
-// go test -v  github.com/mobilemindtec/go-payments/tests -run TestAsaasWallets
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestAsaasWallets
 func TestAsaasWallets(t *testing.T) {
 
 	Asaas := asaas.NewAsaas("pt-BR", AsaasAccessToken, AsaasApiMode)

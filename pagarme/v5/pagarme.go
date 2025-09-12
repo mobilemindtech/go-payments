@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/mobilemindtec/go-utils/v2/either"
+	"github.com/mobilemindtech/go-utils/v2/either"
 	"io/ioutil"
 	"net/http"
 	"reflect"
@@ -15,8 +15,8 @@ import (
 	"github.com/beego/i18n"
 
 	"github.com/beego/beego/v2/core/logs"
-	"github.com/mobilemindtec/go-utils/beego/validator"
-	"github.com/mobilemindtec/go-utils/v2/optional"
+	"github.com/mobilemindtech/go-utils/beego/validator"
+	"github.com/mobilemindtech/go-utils/v2/optional"
 )
 
 const (
@@ -47,10 +47,10 @@ type Pagarme struct {
 	ValidationErrors      map[string]string
 	HasValidationError    bool
 	Debug                 bool
-	ServiceRefererName 	ServiceRefererName
+	ServiceRefererName    ServiceRefererName
 }
 
-func (this *Pagarme) DebugOn()  *Pagarme {
+func (this *Pagarme) DebugOn() *Pagarme {
 	this.SetDebug(true)
 	return this
 }
@@ -73,9 +73,9 @@ func (this *Pagarme) init(lang string, auth *Authentication, serviceRefererName 
 	return this
 }
 
-func (this *Pagarme) validationsToMapOfStringSlice() map[string][]string{
+func (this *Pagarme) validationsToMapOfStringSlice() map[string][]string {
 	results := make(map[string][]string)
-	for k, v := range this.ValidationErrors{
+	for k, v := range this.ValidationErrors {
 		results[k] = []string{v}
 	}
 
@@ -218,7 +218,6 @@ func (this *Pagarme) request(
 
 	default:
 
-
 		err = json.Unmarshal(body, response.Error)
 		if err != nil {
 			return either.Left[error, *Response](
@@ -289,7 +288,7 @@ func (this *Pagarme) processValidator() bool {
 			this.ValidationErrors = errs
 			this.HasValidationError = true
 		}
-		if verror, ok  := fail.Error.(*validator.ValidationError); ok {
+		if verror, ok := fail.Error.(*validator.ValidationError); ok {
 			this.ValidationErrors = verror.Map
 			this.HasValidationError = true
 			logs.Debug("ValidationErrors=%v", this.ValidationErrors)
