@@ -10,6 +10,9 @@ import (
 	"github.com/beego/i18n"
 	"github.com/mobilemindtech/go-payments/api"
 	"github.com/mobilemindtech/go-utils/beego/validator"
+	"github.com/mobilemindtech/go-utils/validator/cnpj"
+	"github.com/mobilemindtech/go-utils/validator/cpf"
+	"github.com/mobilemindtech/go-utils/validator/email"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -62,7 +65,7 @@ func (this *Asaas) CustomerCreate(customer *Customer) (*Response, error) {
 
 	this.Log("Call CustomerCreate")
 
-	if !this.onValid(customer) {
+	if !this.onValidCustomer(customer) {
 		return nil, errors.New(this.getMessage("Asaas.ValidationError"))
 	}
 
@@ -73,7 +76,7 @@ func (this *Asaas) CustomerUpdate(customer *Customer) (*Response, error) {
 
 	this.Log("Call CustomerUpdate")
 
-	if !this.onValid(customer) {
+	if !this.onValidCustomer(customer) {
 		return nil, errors.New(this.getMessage("Asaas.ValidationError"))
 	}
 
@@ -442,7 +445,7 @@ func (this *Asaas) SubscriptionGet(subscriptionId string) (*Response, error) {
 	return this.get(fmt.Sprintf("subscriptions/%v", subscriptionId), nil)
 }
 
-func (this *Asaas) SubscriptionPaymentsGet(subscriptionId string) (*Response, error) {
+func (this *Asaas) SubscriptionPaymentsGet(subscriptionId string, status string) (*Response, error) {
 
 	this.Log("Call SubscriptionPaymentsGet")
 
@@ -461,7 +464,13 @@ func (this *Asaas) SubscriptionPaymentsGet(subscriptionId string) (*Response, er
 		return err
 	}
 
-	return this.get(fmt.Sprintf("subscriptions/%v/payments", subscriptionId), resultProcessor)
+	statusQuery := ""
+
+	if len(status) > 0 {
+		statusQuery = fmt.Sprintf("?status=%v", status)
+	}
+
+	return this.get(fmt.Sprintf("subscriptions/%v/payments%v", subscriptionId, statusQuery), resultProcessor)
 }
 
 func (this *Asaas) SubscriptionFindByKey(key string, value string) (*Response, error) {
@@ -1059,6 +1068,27 @@ func (this *Asaas) request(
 
 func (this *Asaas) onValid(entity interface{}) bool {
 	this.EntityValidatorResult, _ = this.EntityValidator.IsValid(entity, nil)
+
+	if this.EntityValidatorResult.HasError {
+		this.onValidationErrors()
+		return false
+	}
+
+	return true
+}
+
+func (this *Asaas) onValidCustomer(entity *Customer) bool {
+	this.EntityValidatorResult, _ = this.EntityValidator.IsValid(
+		entity,
+		func(validator *validator.Validation) {
+			if !cpf.Validate(entity.CpfCnpj) && !cnpj.Validate(entity.CpfCnpj) {
+				validator.SetError("CpfCnpj", "Asaas.InvalidCpfCnpj")
+			}
+			if !email.IsValid(entity.Email) {
+				validator.SetError("Email", "Asaas.InvalidEmail")
+			}
+		})
+
 
 	if this.EntityValidatorResult.HasError {
 		this.onValidationErrors()

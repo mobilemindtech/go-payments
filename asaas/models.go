@@ -2,9 +2,10 @@ package asaas
 
 import (
 	"fmt"
-	"github.com/mobilemindtech/go-payments/api"
 	"io"
 	"time"
+
+	"github.com/mobilemindtech/go-payments/api"
 )
 
 type BillingType string
@@ -106,6 +107,28 @@ const (
 	APPROVED DocumentStatus = "APPROVED"
 	REJECTED DocumentStatus = "REJECTED"
 )
+
+type Notifications struct {
+
+	//Enable/disable notification
+	Enabled bool `json:"enabled"`
+	//enable/disable the email sent to you
+	EmailEnabledForProvider bool `json:"emailEnabledForProvider"`
+	//enable/disable the SMS sent to you
+	SmsEnabledForProvider bool `json:"smsEnabledForProvider"`
+	//enable/disable the email sent to your customer
+	EmailEnabledForCustomer bool `json:"emailEnabledForCustomer"`
+	//enable/disable the SMS sent to your customer
+	SmsEnabledForCustomer bool `json:"smsEnabledForCustomer"`
+	//enable/disable voice notification sent to your customer
+	PhoneCallEnabledForCustomer bool `json:"phoneCallEnabledForCustomer"`
+	//enable/disable WhatsApp messages for your customer
+	WhatsappEnabledForCustomer bool `json:"whatsappEnabledForCustomer"`
+	//Specifies how many days before the due date the notification must be sent.
+	//For the PAYMENT_DUEDATE_WARNING event, the accepted values are: 0, 5, 10, 15 and 30.
+	//For the PAYMENT_OVERDUE event, the accepted values are: 1, 7, 15 and 30
+	ScheduleOffset int `json:"scheduleOffset"`
+}
 
 type WebhookObject struct {
 	Url         string      `json:"url" valid:"Required"`

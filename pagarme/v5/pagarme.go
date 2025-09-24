@@ -17,6 +17,9 @@ import (
 	"github.com/beego/beego/v2/core/logs"
 	"github.com/mobilemindtech/go-utils/beego/validator"
 	"github.com/mobilemindtech/go-utils/v2/optional"
+	"github.com/mobilemindtech/go-utils/validator/email"
+	"github.com/mobilemindtech/go-utils/validator/cnpj"
+	"github.com/mobilemindtech/go-utils/validator/cpf"
 )
 
 const (
@@ -236,7 +239,14 @@ func (this *Pagarme) onValidCustomer(customer CustomerPtr) bool {
 
 	this.EntityValidator.AddValidationForType(
 		reflect.TypeOf(customer), func(entity interface{}, validator *validator.Validation) {
-			//p := entity.(CustomerPtr)
+
+
+			if !cpf.Validate(customer.Document) && !cnpj.Validate(customer.Document) {
+				validator.SetError("Document", "Pagarme.InvalidDocument")
+			}
+			if !email.IsValid(customer.Email) {
+				validator.SetError("Email", "Pagarme.InvalidEmail")
+			}
 
 		})
 
