@@ -459,7 +459,7 @@ type PaymentFind struct {
 	Page       int    `jsonp:""` // results page
 
 	PaymentType PaymentType `jsonp:""` // picpay, pix
-
+	
 	CustomerDocument string `jsonp:""`
 
 	CustomerExternalReference string `jsonp:""`
