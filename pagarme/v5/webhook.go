@@ -37,6 +37,10 @@ func (this *WebhookData) IsCharge() bool {
 	return strings.HasPrefix(string(this.Event), "charge.")
 }
 
+func (this *WebhookData) IsChargeCreated() bool {
+	return string(this.Event) == "charge.created"
+}
+
 type Webhook struct {
 	JsonParser *support.JsonParser
 	Debug      bool
