@@ -421,7 +421,8 @@ type Payment struct {
 
 	BoletoInstructions string `jsonp:"boleto_instructions"`
 
-	Order *Order `jsonp:""`
+	Order     *Order `jsonp:""`
+	PaymentId string `jsonp:"payment_id"`
 }
 
 func NewPayment() *Payment {

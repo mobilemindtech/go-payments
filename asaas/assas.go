@@ -360,6 +360,33 @@ func (this *Asaas) SubscriptionUpdate(payment *Payment) (*Response, error) {
 	return this.post(payment, fmt.Sprintf("subscriptions/%v", payment.Id), nil)
 }
 
+func (this *Asaas) PaymentPayWithCreditCard(payment *Payment) (*Response, error) {
+
+	this.Log("Call PaymentPayWithCreditCard")
+
+	if len(payment.Id) == 0 {
+		this.SetValidationError("Id", "is required")
+		return nil, errors.New(this.getMessage("Asaas.ValidationError"))
+	}
+
+	data := make(map[string]interface{})
+
+	if len(payment.CardToken) > 0 {
+		data["creditCardToken"] = payment.CardToken
+	} else {
+		if !this.onValidCard(payment) {
+			return nil, errors.New(this.getMessage("Asaas.ValidationError"))
+		}
+
+		data["creditCard"] = payment.Card
+	}
+
+	data["creditCardHolderInfo"] = payment.CardHolderInfo
+	//data["remoteIp"] = payment.RemoteIp
+
+	return this.post(data, fmt.Sprintf("payments/%v/payWithCreditCard", payment.Id), nil)
+}
+
 /*
 Sobre a atualização, você consegue atualizar o cartão de uma assinatura por exemplo:
 Na assinatura, quando o cliente paga com cartão de crédito, o cartão dele é automaticamente cadastrado para ser usado na recorrência.
