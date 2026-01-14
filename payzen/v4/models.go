@@ -229,7 +229,7 @@ type Payment struct {
 	PaymentMethodToken string              `json:"paymentMethodToken,omitempty"` // topken de um cartão
 	Customer           *Customer           `json:"customer"`
 	TransactionOptions *TransactionOptions `json:"transactionOptions,omitempty"`
-	FormAction         string              `json:"formAction" valid:"Required"` // PAYMENT
+	FormAction         string              `json:"formAction,omitempty" valid:"Required"` // PAYMENT
 	PaymentForms       []*Card             `json:"paymentForms"`
 	Device             *Device             `json:"device"`
 	Metadata           map[string]string   `json:"metadata,omitempty"`

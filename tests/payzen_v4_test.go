@@ -16,7 +16,7 @@ func createPayment() *v4.Payment {
 	payment.Card.Number = "4970100000000007"
 	payment.Card.Brand = "VISA"
 	payment.Card.ExpiryMonth = 12
-	payment.Card.ExpiryYear = 2025
+	payment.Card.ExpiryYear = 2030
 	payment.Card.SecurityCode = "123"
 	payment.Card.CardHolderName = "Ricardo Bocchi"
 	payment.Card.InstallmentNumber = 1

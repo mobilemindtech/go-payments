@@ -103,7 +103,7 @@ func init() {
 	AsaasAccessToken = jsonParser.GetJsonString(asaasObj, "api_key")
 
 	fmt.Printf("init picpay token = %v, sallerToken = %v\n", Token, SallerToken)
-	fmt.Printf("init payzen data: Mode = %v, ShopId = %v, Cert = %v\n", Mode, ShopId)
+	fmt.Printf("init payzen data: Mode = %v, ShopId = %v\n", Mode, ShopId)
 	fmt.Printf("init pagarme v5 public key = %v, secret key = %v\n", PublicKey, SecretKey)
 	fmt.Printf("init payzen v4 data: Mode = %v, username = %v, Password = %v\n", ApiMode, username, passwordTest)
 	fmt.Printf("init asaas: Token = %v\n", AsaasAccessToken)

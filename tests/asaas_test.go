@@ -1,7 +1,6 @@
 package gopayments
 
 import (
-	"fmt"
 	"github.com/mobilemindtech/go-payments/api"
 	"github.com/mobilemindtech/go-payments/asaas"
 	"testing"
@@ -81,19 +80,19 @@ func TestAsaasCustomerFind(t *testing.T) {
 	}
 
 	if result.CustomerResults.TotalCount != 1 {
-		t.Errorf(fmt.Sprintf("Customer count expected %v  returned %v", 1, result.CustomerResults.TotalCount))
+		t.Errorf("Customer count expected %v  returned %v", 1, result.CustomerResults.TotalCount)
 		return
 	}
 
 	customer := result.CustomerResults.First()
 
 	if customer.Id != id {
-		t.Errorf(fmt.Sprintf("Customer id expected %v  returned %v", id, customer.Id))
+		t.Errorf("Customer id expected %v  returned %v", id, customer.Id)
 		return
 	}
 
 	if customer.Name != "Ricardos Bocchi" {
-		t.Errorf(fmt.Sprintf("Customer name expected %v  returned %v", "Ricardos Bocchi", customer.Name))
+		t.Errorf("Customer name expected %v  returned %v", "Ricardos Bocchi", customer.Name)
 		return
 	}
 }
@@ -120,19 +119,19 @@ func TestAsaasCustomerGet(t *testing.T) {
 	}
 
 	if !result.CustomerResults.HasData() {
-		t.Errorf(fmt.Sprintf("Customer expected, but is null"))
+		t.Errorf("Customer expected, but is null")
 		return
 	}
 
 	customer := result.CustomerResults.First()
 
 	if customer.Id != id {
-		t.Errorf(fmt.Sprintf("Customer id expected %v  returned %v", id, customer.Id))
+		t.Errorf("Customer id expected %v  returned %v", id, customer.Id)
 		return
 	}
 
 	if customer.Name != "Ricardos Bocchi" {
-		t.Errorf(fmt.Sprintf("Customer name expected %v  returned %v", "Ricardos Bocchi", customer.Name))
+		t.Errorf("Customer name expected %v  returned %v", "Ricardos Bocchi", customer.Name)
 		return
 	}
 }
@@ -823,7 +822,7 @@ func TestAsaasSubscriptionPaymentsGet(t *testing.T) {
 
 	id, _ := CacheClient.Get("SubscriptionId").Result()
 
-	result, err := Asaas.SubscriptionPaymentsGet(id)
+	result, err := Asaas.SubscriptionPaymentsGet(id, "pending")
 
 	if err != nil {
 		t.Errorf("Erro ao buscar subscription: %v", err)

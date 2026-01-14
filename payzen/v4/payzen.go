@@ -130,7 +130,10 @@ func (this *PayZen) TokenCreate(payment *Payment) (*PayZenResult, error) {
 		return nil, errors.New(this.getMessage("PayZen.ValidationError"))
 	}
 
+	payment.FormAction = "REGISTER"
+
 	result := new(PaymentResponse)
+
 	info, err := this.request(payment, "PCI/Charge/CreateToken", result)
 	result.Response = info["Response"]
 	result.Request = info["Request"]
