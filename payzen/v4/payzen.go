@@ -6,12 +6,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/beego/beego/v2/core/validation"
-	"github.com/beego/i18n"
-	"github.com/mobilemindtech/go-utils/beego/validator"
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/beego/beego/v2/core/validation"
+	"github.com/beego/i18n"
+	"github.com/mobilemindtech/go-utils/beego/validator"
 )
 
 const (
@@ -405,18 +406,18 @@ func (this *PayZen) onValidSubscription(subscription *Subscription) bool {
 }
 
 func (this *PayZen) onValidPayment(payment *Payment) bool {
-	return this.validPayment(payment, false, false, false)
+	return this.validPayment(payment, false, false)
 }
 
 func (this *PayZen) onValidPaymentWithCreateToken(payment *Payment) bool {
-	return this.validPayment(payment, false, true, false)
+	return this.validPayment(payment, true, false)
 }
 
 func (this *PayZen) onValidPaymentWithUpdateToken(payment *Payment) bool {
-	return this.validPayment(payment, false, true, true)
+	return this.validPayment(payment, true, true)
 }
 
-func (this *PayZen) validPayment(payment *Payment, checkPaymentId bool, tokenOperation bool, tokenUpdate bool) bool {
+func (this *PayZen) validPayment(payment *Payment, tokenOperation bool, tokenUpdate bool) bool {
 
 	items := []interface{}{
 		payment,
@@ -425,17 +426,13 @@ func (this *PayZen) validPayment(payment *Payment, checkPaymentId bool, tokenOpe
 		payment.Device,
 	}
 
-	if payment.Card != nil && len(strings.TrimSpace(payment.Card.PaymentMethodToken)) == 0 && len(strings.TrimSpace(payment.PaymentMethodToken)) == 0 {
-		items = append(items, payment.Card)
+	needCardInfo := payment.GetCard() != nil && len(payment.GetCard().PaymentMethodToken) == 0
+
+	if needCardInfo {
+		items = append(items, payment.GetCard())
 	}
 
 	this.EntityValidatorResult, _ = this.EntityValidator.ValidMult(items, func(validator *validation.Validation) {
-
-		if checkPaymentId {
-			if len(strings.TrimSpace(payment.PaymentOrderId)) == 0 {
-				validator.SetError(this.getMessage("PayZen.PaymentOrderId"), this.getMessage("PayZen.required"))
-			}
-		}
 
 		if !tokenOperation {
 
@@ -443,12 +440,12 @@ func (this *PayZen) validPayment(payment *Payment, checkPaymentId bool, tokenOpe
 				validator.SetError(this.getMessage("PayZen.OrderId"), this.getMessage("PayZen.required"))
 			}
 
-			if payment.Card == nil && !checkPaymentId {
+			if payment.GetCard() == nil {
 				validator.SetError(this.getMessage("PayZen.Card"), this.getMessage("PayZen.required"))
 			}
 
-			if payment.Card != nil {
-				if payment.Card.InstallmentNumber <= 0 {
+			if payment.GetCard() != nil {
+				if payment.GetCard().InstallmentNumber <= 0 {
 					validator.SetError(this.getMessage("PayZen.Installments"), this.getMessage("PayZen.required"))
 				}
 			}
@@ -457,7 +454,7 @@ func (this *PayZen) validPayment(payment *Payment, checkPaymentId bool, tokenOpe
 				validator.SetError(this.getMessage("PayZen.Amount"), this.getMessage("PayZen.required"))
 			}
 
-			if payment.Customer == nil && !checkPaymentId {
+			if payment.Customer == nil {
 				validator.SetError(this.getMessage("PayZen.Customer"), this.getMessage("PayZen.required"))
 			}
 
@@ -470,7 +467,7 @@ func (this *PayZen) validPayment(payment *Payment, checkPaymentId bool, tokenOpe
 		}
 
 		if tokenUpdate {
-			if len(strings.TrimSpace(payment.PaymentMethodToken)) == 0 && len(strings.TrimSpace(payment.Card.PaymentMethodToken)) == 0 {
+			if len(strings.TrimSpace(payment.GetCard().PaymentMethodToken)) == 0 {
 				validator.SetError(this.getMessage("PaymentMethodToken"), this.getMessage("PayZen.required"))
 			}
 		}

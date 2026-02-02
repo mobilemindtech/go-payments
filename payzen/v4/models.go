@@ -2,11 +2,12 @@ package v4
 
 import (
 	"fmt"
-	"github.com/leekchan/accounting"
-	"github.com/mobilemindtech/go-payments/api"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/leekchan/accounting"
+	"github.com/mobilemindtech/go-payments/api"
 )
 
 const (
@@ -183,7 +184,7 @@ type Card struct {
 	ExpiryYear            int64  `json:"expiryYear" valid:"Required"`
 	SecurityCode          string `json:"securityCode" valid:"Required"`
 	Brand                 string `json:"brand" valid:"Required"`
-	CardHolderName        string `json:"cardHolderName" valid:"Required"`
+	CardHolderName        string `json:"cardHolderName,omitempty" valid:"Required"`
 	FirstInstallmentDelay int64  `json:"firstInstallmentDelay,omitempty"`
 	InstallmentNumber     int64  `json:"installmentNumber"`
 	PaymentMethodToken    string `json:"paymentMethodToken,omitempty"`
@@ -217,16 +218,16 @@ func NewDevice() *Device {
 }
 
 func NewCard() *Card {
-	return &Card{PaymentMethodType: "CARD"}
+	return &Card{PaymentMethodType: "CARD", InstallmentNumber: 1}
 }
 
 type Payment struct {
-	PaymentOrderId     string              `json:"paymentOrderId,omitempty"`
-	OrderId            string              `json:"orderId" valid:"Required"`
-	Amount             int64               `json:"amount" valid:"Required"`
-	Currency           string              `json:"currency" valid:"Required"`
-	IpnTargetUrl       string              `json:"ipnTargetUrl,omitempty"`       // URL de notificação estantânea
-	PaymentMethodToken string              `json:"paymentMethodToken,omitempty"` // topken de um cartão
+	PaymentOrderId string `json:"paymentOrderId,omitempty"`
+	OrderId        string `json:"orderId" valid:"Required"`
+	Amount         int64  `json:"amount" valid:"Required"`
+	Currency       string `json:"currency" valid:"Required"`
+	IpnTargetUrl   string `json:"ipnTargetUrl,omitempty"` // URL de notificação estantânea
+	//PaymentMethodToken string              `json:"paymentMethodToken,omitempty"` // topken de um cartão
 	Customer           *Customer           `json:"customer"`
 	TransactionOptions *TransactionOptions `json:"transactionOptions,omitempty"`
 	FormAction         string              `json:"formAction,omitempty" valid:"Required"` // PAYMENT
@@ -234,7 +235,18 @@ type Payment struct {
 	Device             *Device             `json:"device"`
 	Metadata           map[string]string   `json:"metadata,omitempty"`
 	FingerPrintId      string              `json:"fingerPrintId,omitempty"`
-	Card               *Card               `json:"-"`
+	//Card               *Card               `json:"-"`
+}
+
+func (this *Payment) SetCard(card *Card) {
+	this.PaymentForms[0] = card
+}
+
+func (this *Payment) GetCard() *Card {
+	if this.PaymentForms == nil || len(this.PaymentForms) == 0 {
+		return nil
+	}
+	return this.PaymentForms[0]
 }
 
 func (this *Payment) SetAmount(amount float64) {
@@ -248,7 +260,6 @@ func NewPayment(amount float64) *Payment {
 		Amount:       ConvertAmount(amount),
 		Currency:     Currency,
 		Customer:     NewCustomer(),
-		Card:         card,
 		PaymentForms: []*Card{card},
 		Device:       NewDevice(),
 		Metadata:     map[string]string{},

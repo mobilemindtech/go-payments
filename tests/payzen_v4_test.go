@@ -3,23 +3,23 @@ package gopayments
 import (
 	_ "encoding/json"
 	"fmt"
-	"github.com/mobilemindtech/go-payments/api"
-	"github.com/mobilemindtech/go-payments/payzen/v4"
 	_ "net/url"
 	_ "strings"
 	"testing"
 	"time"
+
+	"github.com/mobilemindtech/go-payments/api"
+	"github.com/mobilemindtech/go-payments/payzen/v4"
 )
 
 func createPayment() *v4.Payment {
 	payment := v4.NewPayment(15.00)
-	payment.Card.Number = "4970100000000007"
-	payment.Card.Brand = "VISA"
-	payment.Card.ExpiryMonth = 12
-	payment.Card.ExpiryYear = 2030
-	payment.Card.SecurityCode = "123"
-	payment.Card.CardHolderName = "Ricardo Bocchi"
-	payment.Card.InstallmentNumber = 1
+	payment.GetCard().Number = "4970100000000007"
+	payment.GetCard().Brand = "VISA"
+	payment.GetCard().ExpiryMonth = 12
+	payment.GetCard().ExpiryYear = 2030
+	payment.GetCard().SecurityCode = "123"
+	payment.GetCard().CardHolderName = "Ricardo Bocchi"
 
 	payment.OrderId = GenUUID()
 	payment.Customer.Email = "ricardo@mobilemind.com.br"
@@ -81,6 +81,48 @@ func TestPayZenV4PaymentCreate(t *testing.T) {
 	t.Errorf("Authentication = %v", Authentication)
 
 	payment := createPayment()
+	payment.IpnTargetUrl = "https://mobilemind.free.beeceptor.com/webhook/payzen"
+	payzen := v4.NewPayZen("pt-BR", ApiMode, Authentication)
+	payzen.SetDebug()
+
+	result, err := payzen.PaymentCreate(payment)
+
+	if err != nil {
+		t.Errorf("Erro ao criar token: %v", err)
+		return
+	}
+
+	if result.Error {
+		t.Errorf("Erro ao criar token: %v - %v", result.Message, result.Errors)
+		return
+	}
+
+	trans := result.GetTransaction()
+
+	if trans.TransactionStatus != v4.AUTHORISED {
+		t.Errorf("Status expected: %v, returned: %v", v4.AUTHORISED, trans.TransactionStatus)
+		return
+	}
+
+	if trans.PaymentStatus != v4.PAID {
+		t.Errorf("PaymentStatus expected: %v, returned: %v", v4.PAID, trans.PaymentStatus)
+	}
+
+	CacheClient.Set("OrderId", payment.OrderId, 0)
+	CacheClient.Set("TransactionUuid", trans.Uuid, 0)
+}
+
+// go test -v  github.com/mobilemindtech/go-payments/tests -run TestPayZenV4PaymentWithCardTokenCreate
+func TestPayZenV4PaymentWithCardTokenCreate(t *testing.T) {
+
+	t.Errorf("Authentication = %v", Authentication)
+
+	payment := createPayment()
+
+	//payment.Card = nil
+	payment.SetCard(v4.NewCard())
+	payment.GetCard().PaymentMethodToken = "375b95a9bf4a4f769a66d46bd12a1f2c"
+
 	payment.IpnTargetUrl = "https://mobilemind.free.beeceptor.com/webhook/payzen"
 	payzen := v4.NewPayZen("pt-BR", ApiMode, Authentication)
 	payzen.SetDebug()
@@ -196,10 +238,10 @@ func TestPayZenV4TokenUpdate(t *testing.T) {
 	token, _ := CacheClient.Get("Token").Result()
 
 	payment := createPayment()
-	payment.PaymentMethodToken = token
-	payment.Card.ExpiryYear = 2028
-	payment.Card.SecurityCode = "321"
-	payment.Card.CardHolderName = "Ricardo Jao Bocchi"
+	payment.GetCard().PaymentMethodToken = token
+	payment.GetCard().ExpiryYear = 2028
+	payment.GetCard().SecurityCode = "321"
+	payment.GetCard().CardHolderName = "Ricardo Jao Bocchi"
 	payzen := v4.NewPayZen("pt-BR", ApiMode, Authentication)
 	payzen.SetDebug()
 
