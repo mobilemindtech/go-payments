@@ -1,6 +1,6 @@
 module github.com/mobilemindtech/go-payments
 
-go 1.24.3
+go 1.26.0
 
 require (
 	github.com/beego/beego/v2 v2.3.8
