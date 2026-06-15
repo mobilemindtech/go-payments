@@ -647,7 +647,7 @@ func (this *Asaas) TransferList(filter *DefaultFilter) (*Response, error) {
 func (this *Asaas) AccountCreate(account *Account) (*Response, error) {
 	this.Log("Call AccountCreate")
 
-	if !this.onValidAccount(account, true) {
+	if !this.onValidAccount(account, false) {
 		return nil, errors.New(this.getMessage("Asaas.ValidationError"))
 	}
 
@@ -678,7 +678,7 @@ func (this *Asaas) BankAccountMainCreateOrUpdate(bankAccount *BankAccountSimple)
 func (this *Asaas) AccountUpdate(account *Account) (*Response, error) {
 	this.Log("Call AccountUpdate")
 
-	if !this.onValidAccount(account, false) {
+	if !this.onValidAccount(account, true) {
 		return nil, errors.New(this.getMessage("Asaas.ValidationError"))
 	}
 
@@ -1135,7 +1135,7 @@ func (this *Asaas) onValidBankAccount(bankAccount *BankAccountSimple) bool {
 
 	return true
 }
-func (this *Asaas) onValidAccount(account *Account, validateBankAccount bool) bool {
+func (this *Asaas) onValidAccount(account *Account, forUpdate bool) bool {
 
 	items := []interface{}{
 		account,
@@ -1148,11 +1148,13 @@ func (this *Asaas) onValidAccount(account *Account, validateBankAccount bool) bo
 
 	this.EntityValidatorResult, _ = this.EntityValidator.ValidMult(items, func(validator *validation.Validation) {
 
-		if account.Webhooks == nil || len(account.Webhooks) == 0 {
-			validator.SetError("Webhooks", this.getMessage("Asaas.required"))
+		if !forUpdate {
+			if account.Webhooks == nil || len(account.Webhooks) == 0 {
+				validator.SetError("Webhooks", this.getMessage("Asaas.required"))
+			}
 		}
 
-		if validateBankAccount {
+		if !forUpdate {
 			if account.BankAccount == nil {
 				validator.SetError("BankAccount", this.getMessage("Asaas.required"))
 				validator.SetError("Bank", this.getMessage("Asaas.required"))
