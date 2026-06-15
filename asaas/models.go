@@ -215,7 +215,7 @@ type Account struct {
 	PersonType PersonType `json:"personType,omitempty"`
 
 	//DenialReason string `json:"denialReason,omitempty"`
-	IncomeValue int64 `json:"incomeValue"`
+	IncomeValue float64 `json:"incomeValue"`
 
 	Webhooks []*WebhookObject `json:"webhooks"`
 }
