@@ -1139,7 +1139,10 @@ func (this *Asaas) onValidAccount(account *Account, forUpdate bool) bool {
 
 	items := []interface{}{
 		account,
-		account.BankAccount,
+	}
+
+	if !forUpdate && account.BankAccount != nil {
+		items = append(items, account.BankAccount)
 	}
 
 	//if account.BankAccount != nil {
@@ -1152,9 +1155,7 @@ func (this *Asaas) onValidAccount(account *Account, forUpdate bool) bool {
 			if account.Webhooks == nil || len(account.Webhooks) == 0 {
 				validator.SetError("Webhooks", this.getMessage("Asaas.required"))
 			}
-		}
 
-		if !forUpdate {
 			if account.BankAccount == nil {
 				validator.SetError("BankAccount", this.getMessage("Asaas.required"))
 				validator.SetError("Bank", this.getMessage("Asaas.required"))
