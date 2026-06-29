@@ -20,25 +20,25 @@ func main() {
 		plainText = "hello world"
 	)
 
-	fmt.Println("=== start generating RSA key pair")
+	log.Println("=== start generating RSA key pair")
 	pubKey := bytes.NewBuffer([]byte{})
 	priKey := bytes.NewBuffer([]byte{})
 	xrsa.CreateKeys(pubKey, priKey, 2048)
-	fmt.Println(pubKey.String())
-	fmt.Println(priKey.String())
+	log.Println(pubKey.String())
+	log.Println(priKey.String())
 	// saveToFile("filename", []byte(priKey.String()))
 
-	fmt.Println("=== start encrypting ===")
+	log.Println("=== start encrypting ===")
 	encryptedData, err := RsaEncrypt([]byte(plainText), []byte(pubKey.String()))
 	checkError(err)
 	encryptedText := base64.StdEncoding.EncodeToString(encryptedData)
-	fmt.Println(encryptedText)
+	log.Println(encryptedText)
 
-	fmt.Println("=== start decrypting ===")
+	log.Println("=== start decrypting ===")
 	encryptedData, err = base64.StdEncoding.DecodeString(encryptedText)
 	checkError(err)
 	decryptedData, err := RsaDecrypt([]byte(encryptedData), []byte(priKey.String()))
-	fmt.Println(string(decryptedData))
+	log.Println(string(decryptedData))
 }*/
 
 func CreateKeys(publicKeyWriter, privateKeyWriter io.Writer, keyLength int) error {

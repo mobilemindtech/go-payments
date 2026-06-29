@@ -3,10 +3,11 @@ package v5
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
+	"log"
+	"strings"
+
 	"github.com/mobilemindtech/go-utils/beego/validator"
 	"github.com/mobilemindtech/go-utils/support"
-	"strings"
 )
 
 type WebhookData struct {
@@ -85,9 +86,9 @@ func (this *Webhook) Parse(body []byte) (*WebhookData, error) {
 	data := NewWebhookData()
 
 	if this.Debug {
-		fmt.Println("************************************************")
-		fmt.Println("**** Pagarmev5.Webhook: ", jsonMap)
-		fmt.Println("************************************************")
+		log.Println("************************************************")
+		log.Println("**** Pagarmev5.Webhook: ", jsonMap)
+		log.Println("************************************************")
 	}
 
 	payload := this.JsonParser.GetJsonObject(jsonMap, "data")
@@ -102,7 +103,7 @@ func (this *Webhook) Parse(body []byte) (*WebhookData, error) {
 	if entityValidatorResult.HasError {
 		this.HasValidationError = true
 		this.ValidationErrors = this.EntityValidator.GetValidationErrors(entityValidatorResult)
-		fmt.Println("ValidationErrors = %v", this.ValidationErrors)
+		log.Println("ValidationErrors = %v", this.ValidationErrors)
 		return nil, errors.New("validation error")
 	}
 

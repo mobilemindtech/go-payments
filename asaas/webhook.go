@@ -3,7 +3,8 @@ package asaas
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
+	"log"
+
 	"github.com/mobilemindtech/go-payments/api"
 	"github.com/mobilemindtech/go-utils/beego/validator"
 )
@@ -145,9 +146,9 @@ func (this *Webhook) Parse(body []byte) (*WebhookData, error) {
 	data := NewWebhookData()
 
 	if this.Debug {
-		fmt.Println("************************************************")
-		fmt.Println("**** Asaas.Webhook: ", string(body))
-		fmt.Println("************************************************")
+		log.Println("************************************************")
+		log.Println("**** Asaas.Webhook: ", string(body))
+		log.Println("************************************************")
 	}
 
 	err := json.Unmarshal(body, data)

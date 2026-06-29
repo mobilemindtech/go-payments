@@ -5,12 +5,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+
 	_ "github.com/beego/beego/v2/core/validation"
 	"github.com/beego/i18n"
 	"github.com/mobilemindtech/go-payments/api"
 	"github.com/mobilemindtech/go-utils/beego/validator"
-	"io/ioutil"
-	"net/http"
 )
 
 /*
@@ -42,7 +44,7 @@ func NewPicPay(lang string, token string, sallerToken string) *PicPay {
 func (this *PicPay) CreateTransaction(request *PicPayTransactionRequest) (*PicPayResult, error) {
 
 	if this.Debug {
-		fmt.Println("PicPay CreateTransaction")
+		log.Println("PicPay CreateTransaction")
 	}
 
 	var err error
@@ -76,7 +78,7 @@ func (this *PicPay) CreateTransaction(request *PicPayTransactionRequest) (*PicPa
 func (this *PicPay) CheckStatus(referenceId string) (*PicPayResult, error) {
 
 	if this.Debug {
-		fmt.Println("PicPay CheckStatus")
+		log.Println("PicPay CheckStatus")
 	}
 
 	if len(referenceId) == 0 {
@@ -90,7 +92,7 @@ func (this *PicPay) CheckStatus(referenceId string) (*PicPayResult, error) {
 func (this *PicPay) Cancel(referenceId string, authorizationId string) (*PicPayResult, error) {
 
 	if this.Debug {
-		fmt.Println("PicPay Cancel")
+		log.Println("PicPay Cancel")
 	}
 
 	if len(referenceId) == 0 {
@@ -123,7 +125,7 @@ func (this *PicPay) request(data interface{}, action string) (*PicPayResult, err
 		jsonData, err := json.Marshal(data)
 
 		if err != nil {
-			fmt.Println("error json.Marshal ", err.Error())
+			log.Println("error json.Marshal ", err.Error())
 			return nil, err
 		}
 
@@ -132,9 +134,9 @@ func (this *PicPay) request(data interface{}, action string) (*PicPayResult, err
 		result.Request = string(jsonData)
 
 		if this.Debug {
-			fmt.Println("****************** PicPay Request ******************")
-			fmt.Println(result.Request)
-			fmt.Println("****************** PicPay Request ******************")
+			log.Println("****************** PicPay Request ******************")
+			log.Println(result.Request)
+			log.Println("****************** PicPay Request ******************")
 		}
 
 	} else {
@@ -153,7 +155,7 @@ func (this *PicPay) request(data interface{}, action string) (*PicPayResult, err
 	}
 
 	if reqError != nil {
-		fmt.Println("err = %v", reqError)
+		log.Println("err = %v", reqError)
 		return nil, errors.New(fmt.Sprintf("error on http.NewRequest: %v", reqError))
 	}
 
@@ -163,7 +165,7 @@ func (this *PicPay) request(data interface{}, action string) (*PicPayResult, err
 	res, err := client.Do(req)
 
 	if err != nil {
-		fmt.Println("err = %v", err)
+		log.Println("err = %v", err)
 		return nil, errors.New(fmt.Sprintf("error on client.Do: %v", err))
 	}
 
@@ -171,24 +173,24 @@ func (this *PicPay) request(data interface{}, action string) (*PicPayResult, err
 	body, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
-		fmt.Println("err = %v", err)
+		log.Println("err = %v", err)
 		return nil, errors.New(fmt.Sprintf("error on ioutil.ReadAll: %v", err))
 	}
 
 	result.Response = string(body)
 
 	if this.Debug {
-		fmt.Println("****************** PicPay Response ******************")
-		fmt.Println(result.Response)
-		fmt.Println("****************** PicPay Response ******************")
+		log.Println("****************** PicPay Response ******************")
+		log.Println(result.Response)
+		log.Println("****************** PicPay Response ******************")
 	}
 
 	transaction := new(PicPayTransaction)
 	err = json.Unmarshal(body, transaction)
 
 	if err != nil {
-		fmt.Println("err = %v", err)
-		fmt.Println(result.Response)
+		log.Println("err = %v", err)
+		log.Println(result.Response)
 		return nil, errors.New(fmt.Sprintf("error on json.Unmarshal: %v", err))
 	}
 
@@ -227,7 +229,7 @@ func (this *PicPay) request(data interface{}, action string) (*PicPayResult, err
 		transaction.PicPayStatus = api.PicPayChargeback
 		break
 	default:
-		fmt.Println("PicPay: status %v not found", transaction.StatusText)
+		log.Println("PicPay: status %v not found", transaction.StatusText)
 	}
 
 	result.Transaction = transaction
@@ -259,7 +261,7 @@ func (this *PicPay) onValidationErrors() {
 
 func (this *PicPay) Log(message string, args ...interface{}) {
 	if this.Debug {
-		fmt.Println("PicPay: ", fmt.Sprintf(message, args...))
+		log.Println("PicPay: ", fmt.Sprintf(message, args...))
 	}
 }
 

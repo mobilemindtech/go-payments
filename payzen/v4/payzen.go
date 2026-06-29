@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"strings"
 
@@ -312,7 +313,7 @@ func (this *PayZen) request(requestData interface{}, action string, result inter
 	jsonContent, err := json.MarshalIndent(requestData, " ", "  ")
 
 	if err != nil {
-		fmt.Println("** request: error MarshalIndent: %v", err)
+		log.Println("** request: error MarshalIndent: %v", err)
 		return info, errors.New(fmt.Sprintf("request - MarshalIndent: %v", err.Error()))
 	}
 
@@ -322,11 +323,11 @@ func (this *PayZen) request(requestData interface{}, action string, result inter
 	url := fmt.Sprintf("%v/%v", ApiUrl, action)
 
 	if this.Debug {
-		fmt.Println("**********************************************")
-		fmt.Println(" ----------------- JSON REQUEST --------------")
-		fmt.Println("URL: %v", url)
-		fmt.Println("%v", string(data.Bytes()))
-		fmt.Println("**********************************************")
+		log.Println("**********************************************")
+		log.Println(" ----------------- JSON REQUEST --------------")
+		log.Println("URL: %v", url)
+		log.Println("%v", string(data.Bytes()))
+		log.Println("**********************************************")
 	}
 
 	client := new(http.Client)
@@ -351,14 +352,14 @@ func (this *PayZen) request(requestData interface{}, action string, result inter
 		return info, errors.New(fmt.Sprintf("ioutil.ReadAll: %v", err.Error()))
 	}
 
-	fmt.Println("***********************************")
-	fmt.Println("***** PAYZEN START RESPONSE ******")
-	fmt.Println("***** STATUS CODE: %v", resp.StatusCode)
+	log.Println("***********************************")
+	log.Println("***** PAYZEN START RESPONSE ******")
+	log.Println("***** STATUS CODE: %v", resp.StatusCode)
 	if this.Debug && resp.StatusCode != 200 {
-		fmt.Println("***** RESPONSE: %v", string(response))
+		log.Println("***** RESPONSE: %v", string(response))
 	}
-	fmt.Println("***** PAYZEN END RESPONSE *********")
-	fmt.Println("***********************************")
+	log.Println("***** PAYZEN END RESPONSE *********")
+	log.Println("***********************************")
 
 	info["Response"] = string(response)
 
@@ -370,10 +371,10 @@ func (this *PayZen) request(requestData interface{}, action string, result inter
 			jsonResult := make(map[string]json.RawMessage)
 			json.Unmarshal(response, &jsonResult)
 			jsonContent, _ := json.MarshalIndent(jsonResult, " ", "  ")
-			fmt.Println("***********************************************")
-			fmt.Println(" ----------------- JSON RESPONSE --------------")
-			fmt.Println(string(jsonContent))
-			fmt.Println("***********************************************")
+			log.Println("***********************************************")
+			log.Println(" ----------------- JSON RESPONSE --------------")
+			log.Println(string(jsonContent))
+			log.Println("***********************************************")
 		}
 
 		err := json.Unmarshal(response, result)
@@ -486,7 +487,7 @@ func (this *PayZen) onValidationErrors() {
 	this.HasValidationError = true
 	data := make(map[interface{}]interface{})
 	this.EntityValidator.CopyErrorsToView(this.EntityValidatorResult, data)
-	fmt.Println("DATA ERRORS = %v", data)
+	log.Println("DATA ERRORS = %v", data)
 	this.ValidationErrors = data["errors"].(map[string]string)
 }
 

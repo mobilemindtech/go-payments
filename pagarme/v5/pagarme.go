@@ -6,20 +6,22 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/mobilemindtech/go-utils/v2/either"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"reflect"
 	"strings"
+
+	"github.com/mobilemindtech/go-utils/v2/either"
 
 	"github.com/beego/i18n"
 
 	"github.com/beego/beego/v2/core/logs"
 	"github.com/mobilemindtech/go-utils/beego/validator"
 	"github.com/mobilemindtech/go-utils/v2/optional"
-	"github.com/mobilemindtech/go-utils/validator/email"
 	"github.com/mobilemindtech/go-utils/validator/cnpj"
 	"github.com/mobilemindtech/go-utils/validator/cpf"
+	"github.com/mobilemindtech/go-utils/validator/email"
 )
 
 const (
@@ -178,7 +180,7 @@ func (this *Pagarme) request(
 	res, err := client.Do(req)
 
 	if err != nil {
-		fmt.Println("client.Do err = %v", err)
+		log.Println("client.Do err = %v", err)
 		return either.Left[error, *Response](err)
 	}
 
@@ -186,7 +188,7 @@ func (this *Pagarme) request(
 	body, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
-		fmt.Println("ioutil.ReadAll err = %v", err)
+		log.Println("ioutil.ReadAll err = %v", err)
 		return either.Left[error, *Response](err)
 	}
 
@@ -194,10 +196,10 @@ func (this *Pagarme) request(
 	response.StatusCode = res.StatusCode
 
 	if this.Debug {
-		fmt.Println("****************** Pagarme Response ******************")
-		fmt.Println("STATUS CODE ", res.StatusCode)
-		fmt.Println(response.RawResponse)
-		fmt.Println("****************** Pagarme Response ******************")
+		log.Println("****************** Pagarme Response ******************")
+		log.Println("STATUS CODE ", res.StatusCode)
+		log.Println(response.RawResponse)
+		log.Println("****************** Pagarme Response ******************")
 	}
 
 	switch res.StatusCode {
@@ -206,13 +208,13 @@ func (this *Pagarme) request(
 
 		if parser != nil {
 			if err := parser(body, response); err != nil {
-				fmt.Println("parser err = %v", err)
+				log.Println("parser err = %v", err)
 				return either.Left[error, *Response](err)
 			}
 		} else {
 			err = json.Unmarshal(body, response)
 			if err != nil {
-				fmt.Println("json.Unmarshal err = %v", err)
+				log.Println("json.Unmarshal err = %v", err)
 				return either.Left[error, *Response](err)
 			}
 		}
@@ -239,7 +241,6 @@ func (this *Pagarme) onValidCustomer(customer CustomerPtr) bool {
 
 	this.EntityValidator.AddValidationForType(
 		reflect.TypeOf(customer), func(entity interface{}, validator *validator.Validation) {
-
 
 			if !cpf.Validate(customer.Document) && !cnpj.Validate(customer.Document) {
 				validator.SetError("Document", "Pagarme.InvalidDocument")

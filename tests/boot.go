@@ -3,18 +3,18 @@ package gopayments
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/beego/beego/v2/core/logs"
 	"net"
 	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
 
+	"github.com/beego/beego/v2/core/logs"
+
 	"github.com/go-redis/redis"
 	"github.com/mobilemindtech/go-payments/api"
 	"github.com/mobilemindtech/go-payments/payzen/v4"
 	"github.com/mobilemindtech/go-utils/support"
-	"github.com/satori/go.uuid"
 )
 
 var (
@@ -125,7 +125,7 @@ func GetHostIp() string {
 
 			ip := networkIp.IP.String()
 
-			//fmt.Println("Resolved Host IP: " + ip)
+			//log.Println("Resolved Host IP: " + ip)
 
 			return ip
 		}
