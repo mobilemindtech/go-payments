@@ -696,6 +696,20 @@ func (this *Asaas) AccountUpdate(account *Account) (*Response, error) {
 	return this.post(account, "myAccount/commercialInfo", resultProcessor)
 }
 
+func (this *Asaas) AccountDelete(reason string) (*Response, error) {
+	this.Log("Call AccountDelete")
+	
+	if len(reason) == 0 {
+		return nil, errors.New("reason is required")	
+	}
+	
+	payload := map[string]interface{}{
+		"removeReason": reason,
+	}
+	
+	return this.delete("myAccount", payload)
+}
+
 func (this *Asaas) AccountGet() (*Response, error) {
 	this.Log("Call AccountGet")
 
@@ -874,8 +888,14 @@ func (this *Asaas) get(action string, resultProcessor ResultProcessor) (*Respons
 	return this.request(nil, action, "GET", resultProcessor, false)
 }
 
-func (this *Asaas) delete(action string) (*Response, error) {
-	return this.request(nil, action, "DELETE", nil, false)
+func (this *Asaas) delete(action string, payload ...interface{}) (*Response, error) {
+	var data interface{} = nil
+	
+	if len(payload) > 0 {
+		data = payload[0]
+	}
+	
+	return this.request(data, action, "DELETE", nil, false)
 }
 
 func (this *Asaas) post(data interface{}, action string, resultProcessor ...ResultProcessor) (*Response, error) {
@@ -917,7 +937,7 @@ func (this *Asaas) request(
 
 	this.Log("URL %v, METHOD = %v", apiUrl, method)
 
-	if (method == "POST" || method == "PUT") && data != nil {
+	if (method == "POST" || method == "PUT" || method == "DELETE") && data != nil {
 
 		if !multiPartFormData {
 			payload, err := json.Marshal(data)

@@ -981,6 +981,8 @@ type Response struct {
 	Errors   []*ResponseError `json:"errors"`
 	Message  string
 	Error    bool
+
+	Observations string `json:"observations,omitempty"`
 }
 
 func NewResponse() *Response {
